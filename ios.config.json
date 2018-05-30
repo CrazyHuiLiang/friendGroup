@@ -1,0 +1,9 @@
+{
+   "AppName":"WeexApp",
+   "Version":"0.1",
+   "BuildVersion":"0.1.0",
+   "AppId":"predicting.friends",
+   "CodeSign":"predicting.friends",
+   "Profile":"platforms/ios/Podfile",
+   "WeexBundle":"index.js"
+}
