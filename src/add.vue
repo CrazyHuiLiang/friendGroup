@@ -1,34 +1,36 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <div class="back-container">
-        <image class="back-icon" :src="ui.back"></image>
-        <text class="back-title">发现</text>
+      <div class="back-container" @click="goBack">
+        <!--<image class="back-icon" :src="ui.back"></image>-->
+        <text class="back-title">取消</text>
       </div>
-      <text class="title">朋友圈</text>
+      <text class="title">发朋友圈</text>
       <div class="add-message-container" @click="gotoAddMessage">
         <image class="add-message" :src="ui.addMassage"></image>
       </div>
     </div>
     <scroller class="page-content">
-      <image class="user-background" :src="userInfo.background"></image>
-      <div class="user-info-container">
-        <image class="avatar" :src="userInfo.avatar"></image>
-        <text class="nickname">{{userInfo.nickname}}</text>
-      </div>
-      <div class="message-container">
-        <Message class="row" v-for="(item, index) in list" :ref="'item'+index" :key="index"></Message>
-      </div>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
+      <text>添加朋友圈</text>
     </scroller>
   </div>
 </template>
 
 <script>
-import {getImagePath, getEntryUrl} from './util/util'
+import {getImagePath} from './util/util'
 import Message from './components/Message.vue'
 let navigator = weex.requireModule('navigator')
 export default {
-  name: 'App',
+  name: 'Add',
   data () {
     return {
       ui: {
@@ -47,9 +49,14 @@ export default {
     this.list = ['', '']
   },
   methods: {
+    goBack () {
+      navigator.pop({
+        animated: 'true'
+      })
+    },
     gotoAddMessage () {
       navigator.push({
-        url: getEntryUrl('add'),
+        url: 'http://dotwe.org/raw/dist/519962541fcf6acd911986357ad9c2ed.js',
         animated: 'true'
       }, event => {
         // modal.toast({ message: 'callback: ' + event })

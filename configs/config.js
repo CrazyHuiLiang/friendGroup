@@ -10,7 +10,7 @@ const config = {
   routerFilePath: 'router.js',
   // common
   templateDir: '.temp',
-  entryFilePath: 'entry.js',
+  entryFilePath: 'src/entry.js',
   dev: {
     // Various Dev Server settings
     contentBase: ROOT,

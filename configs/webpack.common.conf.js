@@ -7,6 +7,7 @@ const vueLoaderConfig = require('./vue-loader.conf');
 const vueWebTemp = helper.rootNode(config.templateDir);
 const hasPluginInstalled = fs.existsSync(helper.rootNode(config.pluginFilePath));
 const isWin = /^win/.test(process.platform);
+/*
 const weexEntry = {
   'index': helper.root('entry.js')
 }
@@ -57,7 +58,62 @@ const getEntryFile = () => {
 // 2. src/router/index.js
 // import Vue from 'vue'
 const webEntry = getEntryFile();
+*/
 
+const webEntry = {};
+const weexEntry = {};
+// Wraping the entry file for web.
+const getEntryFileContent = (entryPath, vueFilePath) => {
+  let relativeVuePath = path.relative(path.join(entryPath, '../'), vueFilePath);
+  let relativeEntryPath = helper.rootNode(config.entryFilePath);
+  let relativePluginPath = helper.rootNode(config.pluginFilePath);
+
+  let contents = '';
+  let entryContents = fs.readFileSync(relativeEntryPath).toString();
+  if (isWin) {
+    relativeVuePath = relativeVuePath.replace(/\\/g, '\\\\');
+    relativePluginPath = relativePluginPath.replace(/\\/g, '\\\\');
+  }
+  if (hasPluginInstalled) {
+    contents += `\n// If detact plugins/plugin.js is exist, import and the plugin.js\n`;
+    contents += `import plugins from '${relativePluginPath}';\n`;
+    contents += `plugins.forEach(function (plugin) {\n\tweex.install(plugin)\n});\n\n`;
+    entryContents = entryContents.replace(/weex\.init/, match => `${contents}${match}`);
+    contents = ''
+  }
+  contents += `\nconst App = require('${relativeVuePath}');\n`;
+  contents += `App.el = '#root';\n`;
+  contents += `new Vue(App);\n`;
+  // console.log(entryContents)
+  return entryContents + contents;
+}
+
+// Retrieve entry file mappings by function recursion
+const getEntryFile = (dir) => {
+  dir = dir || '.';
+  const directory = helper.root(dir);
+  fs.readdirSync(directory).forEach((file) => {
+    const fullpath = path.join(directory, file);
+    const stat = fs.statSync(fullpath);
+    const extname = path.extname(fullpath);
+    if (stat.isFile() && extname === '.vue') {
+      const name = path.join(dir, path.basename(file, extname));
+      if (extname === '.vue') {
+        const entryFile = path.join(vueWebTemp, dir, path.basename(file, extname) + '.js');
+        fs.outputFileSync(path.join(entryFile), getEntryFileContent(entryFile, fullpath));
+        webEntry[name] = path.join(entryFile) + '?entry=true';
+      }
+      weexEntry[name] = fullpath + '?entry=true';
+    }
+    else if (stat.isDirectory() && ['build', 'include', 'component'].indexOf(file) === -1) {
+      const subdir = path.join(dir, file);
+      getEntryFile(subdir);
+    }
+  });
+}
+
+// Generate an entry file array before writing a webpack configuration
+getEntryFile();
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,

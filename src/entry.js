@@ -1,11 +1,17 @@
-/* global Vue */
+import Vue from 'vue';
 
-/* weex initialized here, please do not move this line */
-// import store from 'store/index'
-const store = require('./store/index')
-const router = require('./router')
-console.log(store)
-const App = require('@/index.vue')
-/* eslint-disable no-new */
-new Vue(Vue.util.extend({el: '#root', router}, App))
-router.push('/')
+import weex from 'weex-vue-render';
+
+// import render-core.
+// import weex from 'weex-vue-render/dist/index.core';
+
+// need to run `npm i weex-vue-slider weex-vue-stream --save` frist.
+// import the plugins (components and modules) you want to use.
+// import slider from 'weex-vue-slider';
+// import stream from 'weex-vue-stream';
+
+// install the plugins.
+// weex.install(slider);
+// weex.install(stream);
+
+weex.init(Vue);
