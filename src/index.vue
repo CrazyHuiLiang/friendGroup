@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
-    <div class="header">
+  <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
+    <div class="header" :class="[platform === 'ios' ? 'is-ios-header' : '']">
       <div class="back-container">
-        <image class="back-icon" :src="ui.back"></image>
+        <image class="back-icon" :src="ui.back" resize="cover"></image>
         <text class="back-title">发现</text>
       </div>
       <text class="title">朋友圈</text>
@@ -11,22 +11,29 @@
       </div>
     </div>
     <scroller class="page-content">
-      <image class="user-background" :src="userInfo.background"></image>
+      <image class="user-background" :src="userInfo.background" @click="userBackgroundClicked"></image>
       <div class="user-info-container">
-        <image class="avatar" :src="userInfo.avatar"></image>
-        <text class="nickname">{{userInfo.nickname}}</text>
+        <div class="avatar-container">
+          <image class="avatar" :src="userInfo.avatar" @click="userAvatarClicked"></image>
+        </div>
+        <text class="nickname" @click="nickNameClicked">{{userInfo.nickName}}</text>
       </div>
       <div class="message-container">
-        <Message class="row" v-for="(item, index) in list" :ref="'item'+index" :key="index"></Message>
+        <Message class="row" v-for="(item, index) in list" :userInfo="userInfo" :message="item" :ref="'item'+index" :key="index"></Message>
       </div>
     </scroller>
+    <image-picker ref="imagePicker"></image-picker>
   </div>
 </template>
 
 <script>
 import {getImagePath, getEntryUrl} from './util/util'
+import { getMessageList, getUserInfo, updateUserInfo } from './api/index'
+import ImagePicker from './components/ImagePicker'
 import Message from './components/Message.vue'
 let navigator = weex.requireModule('navigator')
+let modal = weex.requireModule('modal')
+
 export default {
   name: 'App',
   data () {
@@ -35,16 +42,18 @@ export default {
         back: getImagePath('back', '.png'),
         addMassage: getImagePath('addMessage', '.png')
       },
-      userInfo: {
-        nickname: '点我更改昵称',
-        avatar: getImagePath('defaultAvatar', '.png'),
-        background: getImagePath('defaultBackground', '.png')
-      },
+      platform: weex.config.env.platform.toLowerCase(),
+      userInfo: {},
       list: []
     }
   },
   mounted () {
-    this.list = ['', '']
+    getUserInfo((response) => {
+      this.userInfo = response
+    })
+    getMessageList((response) => {
+      this.list = response
+    })
   },
   methods: {
     gotoAddMessage () {
@@ -54,9 +63,39 @@ export default {
       }, event => {
         // modal.toast({ message: 'callback: ' + event })
       })
+    },
+    nickNameClicked () {
+      modal.prompt({
+        message: '请输入您的昵称',
+        okTitle: '确定',
+        cancelTitle: '取消'
+      }, r => {
+        if (r.result === '确定') {
+          updateUserInfo({nickName: r.data}, newInfo => {
+            this.userInfo = newInfo
+          })
+        }
+      })
+    },
+    userBackgroundClicked () {
+      let imagePicker = this.$refs.imagePicker
+      imagePicker.pick((url) => {
+        updateUserInfo({background: url}, newInfo => {
+          this.userInfo = newInfo
+        })
+      })
+    },
+    userAvatarClicked () {
+      let imagePicker = this.$refs.imagePicker
+      imagePicker.pick((url) => {
+        updateUserInfo({avatar: url}, newInfo => {
+          this.userInfo = newInfo
+        })
+      })
     }
   },
   components: {
+    ImagePicker,
     Message
   }
 }
@@ -79,6 +118,11 @@ export default {
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
+  }
+  .is-ios-header {
+    top: -50px;
+    padding-top: 30px;
+    height: 130px;
   }
   .back-container {
     flex: 1;
@@ -120,15 +164,24 @@ export default {
   }
   .user-info-container {
     flex-direction: row-reverse;
-    top: -100px;
-    right: 20px;
+    margin-top: -100px;
+    margin-right: 20px;
   }
-  .avatar {
+  .avatar-container {
     width: 150px;
     height: 150px;
+    background-color: #ffffff;
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
     border-style: solid;
-    border-color: #ffffff;
-    border-width: 4px;
+    border-color: #cccccc;
+    border-width: 2px;
+  }
+  .avatar {
+    width: 138px;
+    height: 138px;
   }
   .nickname {
     color: #ffffff;
@@ -136,5 +189,7 @@ export default {
     margin-right: 45px;
     text-align: right;
     line-height: 100px;
+  }
+  .message-container {
   }
 </style>

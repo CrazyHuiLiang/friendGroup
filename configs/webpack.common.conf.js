@@ -105,7 +105,7 @@ const getEntryFile = (dir) => {
       }
       weexEntry[name] = fullpath + '?entry=true';
     }
-    else if (stat.isDirectory() && ['build', 'include', 'component'].indexOf(file) === -1) {
+    else if (stat.isDirectory() && ['build', 'include', 'components'].indexOf(file) === -1) {
       const subdir = path.join(dir, file);
       getEntryFile(subdir);
     }

@@ -20,7 +20,7 @@
     "web": "npm run serve",
     "android": "weex run android",
     "prepack:ios": "npm run clean:ios && rm -rf ./platforms/ios/bundlejs",
-    "pack:ios": "npm run build:prod",
+    "pack:ios": "npm run build",
     "postpack:ios": "cp -R ./dist ./platforms/ios/bundlejs && cp -R ./assets ./platforms/ios/bundlejs/assets",
     "pack:android": "npm run clean:android && weex build android",
     "pack:web": "npm run clean:web && npm run build:prod:web"
