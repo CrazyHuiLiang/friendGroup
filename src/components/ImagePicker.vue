@@ -1,10 +1,11 @@
 <template>
-  <div class="image-picker">
+  <div class="image-picker" hidden>
   </div>
 </template>
 
 <script>
 let modal = weex.requireModule('modal')
+let imagePicker = weex.requireModule('imagePicker')
 export default {
   name: 'ImagePicker',
   methods: {
@@ -14,7 +15,10 @@ export default {
       } else if (WXEnvironment.platform === 'android') {
         modal.toast({ message: '功能即将上线，敬请期待' })
       } else {
-        modal.toast({ message: '功能即将上线，敬请期待' })
+        imagePicker.pick((data) => {
+          let url = data// 'data:image/jpeg;base64,' + data
+          callback(url)
+        })
       }
     },
     webPick (callback) {
@@ -44,7 +48,4 @@ export default {
 </script>
 
 <style>
-  .image-picker {
-    display: none;
-  }
 </style>

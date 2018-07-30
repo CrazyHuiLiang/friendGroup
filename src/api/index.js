@@ -21,7 +21,6 @@ export function getUserInfo (callback) {
     } else {
       userInfo = JSON.parse(event.data)
     }
-    // console.log(userInfo)
     callback(userInfo)
   })
 }
@@ -47,9 +46,9 @@ export function updateUserInfo (info, callback) {
 export function getMessageList (callback) {
   let list = [
     {
-      content: 'weex的文档写的真是糟糕通了，都三四年的项目了，文档还这么乱，真不害臊',
+      content: '太漂亮了',
       images: [
-        'https://img.zcool.cn/community/012047575fc8330000012e7e28d77b.jpg@1280w_1l_2o_100sh.jpg'
+        'https://img.zcool.cn/community/01f3445b1a45a5a8012034f7fbe6a7.jpg@1280w_1l_2o_100sh.jpg'
       ]
     }
   ]

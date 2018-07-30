@@ -10,7 +10,7 @@
         <image class="add-message" :src="ui.addMassage"></image>
       </div>
     </div>
-    <scroller class="page-content">
+    <scroller v-if="userInfo" class="page-content">
       <image class="user-background" :src="userInfo.background" @click="userBackgroundClicked"></image>
       <div class="user-info-container">
         <div class="avatar-container">
@@ -43,7 +43,7 @@ export default {
         addMassage: getImagePath('addMessage', '.png')
       },
       platform: weex.config.env.platform.toLowerCase(),
-      userInfo: {},
+      userInfo: null,
       list: []
     }
   },
