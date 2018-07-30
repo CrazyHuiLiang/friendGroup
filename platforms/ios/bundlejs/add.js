@@ -62,49 +62,57 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 247);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
 
+/* styles */
+__vue_styles__.push(__webpack_require__(16)
+)
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getImagePath = getImagePath;
-exports.getEntryUrl = getEntryUrl;
+/* script */
+__vue_exports__ = __webpack_require__(17)
 
-// 获取本地静态资源（图片）路径
-function getImagePath(name) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
-
-  // debugger
-  if (WXEnvironment.platform === 'Web') {
-    return abs + 'assets/img/' + name + type;
-  } else if (WXEnvironment.platform === 'android') {
-    return 'local:///' + name;
-  } else {
-    return 'local:///bundlejs/assets/img/' + name + type;
-  }
+/* template */
+var __vue_template__ = __webpack_require__(18)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
 }
-function getEntryUrl(name) {
-  if (weex.config.env.platform === 'Web') {
-    return './' + name + '.html';
-  } else {
-    var arr = weex.config.bundleUrl.split('/');
-    arr.pop();
-    arr.push(name + '.js');
-    return arr.join('/');
-  }
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
 }
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/Message.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-69b0dd62"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
 
 /***/ }),
-/* 1 */
+
+/***/ 16:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -163,7 +171,8 @@ module.exports = {
 }
 
 /***/ }),
-/* 2 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -173,7 +182,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(4);
 
 exports.default = {
   name: 'Message',
@@ -227,7 +236,8 @@ exports.default = {
 // const navigator = weex.requireModule('navigator')
 
 /***/ }),
-/* 3 */
+
+/***/ 18:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -270,21 +280,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 4 */
+
+/***/ 247:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(1)
+__vue_styles__.push(__webpack_require__(248)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(2)
+__vue_exports__ = __webpack_require__(249)
 
 /* template */
-var __vue_template__ = __webpack_require__(3)
+var __vue_template__ = __webpack_require__(250)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -296,57 +307,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/weexApp/src/components/Message.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/add.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-b4fc08ba"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(9)
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(10)
-
-/* template */
-var __vue_template__ = __webpack_require__(11)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/weexApp/src/add.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-b80fe388"
+__vue_options__._scopeId = "data-v-362fc65d"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -363,7 +327,8 @@ new Vue(module.exports)
 
 
 /***/ }),
-/* 9 */
+
+/***/ 248:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -438,7 +403,8 @@ module.exports = {
 }
 
 /***/ }),
-/* 10 */
+
+/***/ 249:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -448,9 +414,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(4);
 
-var _Message = __webpack_require__(4);
+var _Message = __webpack_require__(15);
 
 var _Message2 = _interopRequireDefault(_Message);
 
@@ -526,7 +492,8 @@ exports.default = {
 };
 
 /***/ }),
-/* 11 */
+
+/***/ 250:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -561,5 +528,45 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 }]}
 module.exports.render._withStripped = true
 
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImagePath = getImagePath;
+exports.getEntryUrl = getEntryUrl;
+
+// 获取本地静态资源（图片）路径
+function getImagePath(name) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
+
+  // debugger
+  if (WXEnvironment.platform === 'Web') {
+    return abs + 'assets/img/' + name + type;
+  } else if (WXEnvironment.platform === 'android') {
+    return 'local:///' + name;
+  } else {
+    return 'local:///bundlejs/assets/img/' + name + type;
+  }
+}
+function getEntryUrl(name) {
+  if (weex.config.env.platform === 'Web') {
+    return './' + name + '.html';
+  } else {
+    var arr = weex.config.bundleUrl.split('/');
+    arr.pop();
+    arr.push(name + '.js');
+    return arr.join('/');
+  }
+}
+
 /***/ })
-/******/ ]);
+
+/******/ });

@@ -62,49 +62,57 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 251);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 15:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
 
+/* styles */
+__vue_styles__.push(__webpack_require__(16)
+)
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getImagePath = getImagePath;
-exports.getEntryUrl = getEntryUrl;
+/* script */
+__vue_exports__ = __webpack_require__(17)
 
-// 获取本地静态资源（图片）路径
-function getImagePath(name) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
-
-  // debugger
-  if (WXEnvironment.platform === 'Web') {
-    return abs + 'assets/img/' + name + type;
-  } else if (WXEnvironment.platform === 'android') {
-    return 'local:///' + name;
-  } else {
-    return 'local:///bundlejs/assets/img/' + name + type;
-  }
+/* template */
+var __vue_template__ = __webpack_require__(18)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
 }
-function getEntryUrl(name) {
-  if (weex.config.env.platform === 'Web') {
-    return './' + name + '.html';
-  } else {
-    var arr = weex.config.bundleUrl.split('/');
-    arr.pop();
-    arr.push(name + '.js');
-    return arr.join('/');
-  }
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
 }
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/Message.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-69b0dd62"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
 
 /***/ }),
-/* 1 */
+
+/***/ 16:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -163,7 +171,8 @@ module.exports = {
 }
 
 /***/ }),
-/* 2 */
+
+/***/ 17:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -173,7 +182,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(4);
 
 exports.default = {
   name: 'Message',
@@ -227,7 +236,8 @@ exports.default = {
 // const navigator = weex.requireModule('navigator')
 
 /***/ }),
-/* 3 */
+
+/***/ 18:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -270,21 +280,22 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 4 */
+
+/***/ 251:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(1)
+__vue_styles__.push(__webpack_require__(252)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(2)
+__vue_exports__ = __webpack_require__(253)
 
 /* template */
-var __vue_template__ = __webpack_require__(3)
+var __vue_template__ = __webpack_require__(259)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -296,108 +307,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/weexApp/src/components/Message.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/index.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-b4fc08ba"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = {}
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-
-var modal = weex.requireModule('modal');
-exports.default = {
-  name: 'ImagePicker',
-  methods: {
-    pick: function pick() {
-      if (WXEnvironment.platform === 'Web') {
-        modal.toast({ message: '功能即将上线，敬请期待' });
-      } else if (WXEnvironment.platform === 'android') {
-        modal.toast({ message: '功能即将上线，敬请期待' });
-      } else {
-        modal.toast({ message: '功能即将上线，敬请期待' });
-      }
-    }
-  }
-};
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('text', {
-    staticClass: ["message"]
-  }, [_vm._v("一个简单的测试")])
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-
-/***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(15)
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(16)
-
-/* template */
-var __vue_template__ = __webpack_require__(19)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/weexApp/src/index.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-d6192da6"
+__vue_options__._scopeId = "data-v-781d9d0e"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -414,7 +327,8 @@ new Vue(module.exports)
 
 
 /***/ }),
-/* 15 */
+
+/***/ 252:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -503,7 +417,8 @@ module.exports = {
 }
 
 /***/ }),
-/* 16 */
+
+/***/ 253:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -513,15 +428,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(4);
 
-var _index = __webpack_require__(17);
+var _index = __webpack_require__(254);
 
-var _ImagePicker = __webpack_require__(18);
+var _ImagePicker = __webpack_require__(255);
 
 var _ImagePicker2 = _interopRequireDefault(_ImagePicker);
 
-var _Message = __webpack_require__(4);
+var _Message = __webpack_require__(15);
 
 var _Message2 = _interopRequireDefault(_Message);
 
@@ -568,7 +483,7 @@ exports.default = {
         addMassage: (0, _util.getImagePath)('addMessage', '.png')
       },
       platform: weex.config.env.platform.toLowerCase(),
-      userInfo: {},
+      userInfo: null,
       list: []
     };
   },
@@ -608,8 +523,24 @@ exports.default = {
       });
     },
     userBackgroundClicked: function userBackgroundClicked() {
+      var _this3 = this;
+
       var imagePicker = this.$refs.imagePicker;
-      imagePicker.pick();
+      imagePicker.pick(function (url) {
+        (0, _index.updateUserInfo)({ background: url }, function (newInfo) {
+          _this3.userInfo = newInfo;
+        });
+      });
+    },
+    userAvatarClicked: function userAvatarClicked() {
+      var _this4 = this;
+
+      var imagePicker = this.$refs.imagePicker;
+      imagePicker.pick(function (url) {
+        (0, _index.updateUserInfo)({ avatar: url }, function (newInfo) {
+          _this4.userInfo = newInfo;
+        });
+      });
     }
   },
   components: {
@@ -619,7 +550,8 @@ exports.default = {
 };
 
 /***/ }),
-/* 17 */
+
+/***/ 254:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -635,7 +567,7 @@ exports.getUserInfo = getUserInfo;
 exports.updateUserInfo = updateUserInfo;
 exports.getMessageList = getMessageList;
 
-var _util = __webpack_require__(0);
+var _util = __webpack_require__(4);
 
 var storage = weex.requireModule('storage');
 /*
@@ -659,7 +591,6 @@ var defaultUserInfo = {
     } else {
       userInfo = JSON.parse(event.data);
     }
-    // console.log(userInfo)
     callback(userInfo);
   });
 }
@@ -682,28 +613,29 @@ function updateUserInfo(info, callback) {
 * */
 function getMessageList(callback) {
   var list = [{
-    content: 'weex的文档写的真是糟糕通了，都三四年的项目了，文档还这么乱，真不害臊',
-    images: ['https://img.zcool.cn/community/012047575fc8330000012e7e28d77b.jpg@1280w_1l_2o_100sh.jpg']
+    content: '太漂亮了',
+    images: ['https://img.zcool.cn/community/01f3445b1a45a5a8012034f7fbe6a7.jpg@1280w_1l_2o_100sh.jpg']
   }];
   callback(list);
 }
 
 /***/ }),
-/* 18 */
+
+/***/ 255:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(5)
+__vue_styles__.push(__webpack_require__(256)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(6)
+__vue_exports__ = __webpack_require__(257)
 
 /* template */
-var __vue_template__ = __webpack_require__(7)
+var __vue_template__ = __webpack_require__(258)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -715,10 +647,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/weexApp/src/components/ImagePicker.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/ImagePicker.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-30415665"
+__vue_options__._scopeId = "data-v-cac97eb8"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -733,7 +665,89 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 19 */
+
+/***/ 256:
+/***/ (function(module, exports) {
+
+module.exports = {}
+
+/***/ }),
+
+/***/ 257:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+
+var modal = weex.requireModule('modal');
+var imagePicker = weex.requireModule('imagePicker');
+exports.default = {
+  name: 'ImagePicker',
+  methods: {
+    pick: function pick(callback) {
+      if (WXEnvironment.platform === 'Web') {
+        this.webPick(callback);
+      } else if (WXEnvironment.platform === 'android') {
+        modal.toast({ message: '功能即将上线，敬请期待' });
+      } else {
+        imagePicker.pick(function (data) {
+          var url = data; // 'data:image/jpeg;base64,' + data
+          callback(url);
+        });
+      }
+    },
+    webPick: function webPick(callback) {
+      var imagePicker = document.querySelector('.image-picker');
+      var input = document.createElement('input');
+      input.accept = 'image/jpeg, image/gif, image/png';
+      input.type = 'file';
+      imagePicker.appendChild(input);
+      input.onchange = function (e) {
+        var files = input.files;
+        if (files.length > 0) {
+          var file = files[0];
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function () {
+            imagePicker.removeChild(input);
+            callback(reader.result);
+          };
+        }
+      };
+      var clickEvent = document.createEvent('MouseEvents');
+      clickEvent.initMouseEvent('click');
+      input.dispatchEvent(clickEvent);
+    }
+  }
+};
+
+/***/ }),
+
+/***/ 258:
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["image-picker"],
+    attrs: {
+      "hidden": ""
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
+
+/***/ 259:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -765,7 +779,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.ui.addMassage
     }
-  })])]), _c('scroller', {
+  })])]), (_vm.userInfo) ? _c('scroller', {
     staticClass: ["page-content"]
   }, [_c('image', {
     staticClass: ["user-background"],
@@ -783,6 +797,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["avatar"],
     attrs: {
       "src": _vm.userInfo.avatar
+    },
+    on: {
+      "click": _vm.userAvatarClicked
     }
   })]), _c('text', {
     staticClass: ["nickname"],
@@ -802,11 +819,51 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "message": item
       }
     })
-  }))]), _c('image-picker', {
+  }))]) : _vm._e(), _c('image-picker', {
     ref: "imagePicker"
   })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImagePath = getImagePath;
+exports.getEntryUrl = getEntryUrl;
+
+// 获取本地静态资源（图片）路径
+function getImagePath(name) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
+
+  // debugger
+  if (WXEnvironment.platform === 'Web') {
+    return abs + 'assets/img/' + name + type;
+  } else if (WXEnvironment.platform === 'android') {
+    return 'local:///' + name;
+  } else {
+    return 'local:///bundlejs/assets/img/' + name + type;
+  }
+}
+function getEntryUrl(name) {
+  if (weex.config.env.platform === 'Web') {
+    return './' + name + '.html';
+  } else {
+    var arr = weex.config.bundleUrl.split('/');
+    arr.pop();
+    arr.push(name + '.js');
+    return arr.join('/');
+  }
+}
+
 /***/ })
-/******/ ]);
+
+/******/ });

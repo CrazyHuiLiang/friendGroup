@@ -1,5 +1,41 @@
 import { getImagePath } from '../util/util'
 const storage = weex.requireModule('storage')
+const stream = weex.requireModule('stream')
+const host = ''
+
+// 封装发送post请求的方法
+function post (url, body, processHandler) {
+  return new Promise((resolve, reject) => {
+    stream.fetch({
+      method: 'POST',
+      url,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+      type: 'json'
+    }, function (ret) {
+      if (ret.ok) {
+        resolve(ret)
+      } else {
+        reject(ret)
+      }
+    }, processHandler)
+  })
+}
+/*
+  登录
+  account: 账号
+  password： 密码
+  return Promise
+ */
+export function login (account, password) {
+  return post(host + '/api/login', {
+    account,
+    password
+  })
+}
+
 /*
 * 用户信息
 * */

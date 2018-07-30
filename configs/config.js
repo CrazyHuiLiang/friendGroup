@@ -48,7 +48,9 @@ const config = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
-    proxyTable: {},
+    proxyTable: {
+      "/api": "http://localhost:3000"
+    },
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
