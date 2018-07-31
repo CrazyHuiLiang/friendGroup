@@ -35,6 +35,18 @@ export function login (account, password) {
     password
   })
 }
+/*
+  注册
+  account: 账号
+  password： 密码
+  return Promise
+ */
+export function register (account, password) {
+  return post(host + '/api/register', {
+    account,
+    password
+  })
+}
 
 /*
 * 用户信息

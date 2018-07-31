@@ -9,7 +9,7 @@
     <wxc-cell label="密码"
               :has-arrow="false"
               :has-margin="true">
-      <input slot="title" placeholder="请填写密码" v-model="password"/>
+      <input slot="title" placeholder="请填写密码" type="password" v-model="password"/>
     </wxc-cell>
     <text @click="gotoRegister">还没有账号</text>
     <WxcButton type="blue" text="登录" @wxcButtonClicked="login"></WxcButton>
@@ -53,9 +53,15 @@ export default {
           message: '请输入密码'
         })
       } else {
-        login(this.account, this.password).then(response => {
-          this.$store.commit('setUserInfo', response.data.info)
-          this.gotoFriendList()
+        login(this.account, this.password).then(({data}) => {
+          if (data.state === true) {
+            this.$store.commit('setUserInfo', data.info)
+            this.gotoFriendList()
+          } else {
+            modal.toast({
+              message: data.info
+            })
+          }
         }, error => {
           console.log(error)
         })

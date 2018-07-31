@@ -21,7 +21,10 @@ export default {
           resolve(state.userInfo)
         } else {
           storage.getItem(UserInfoKey, response => {
-            let userInfo = JSON.parse(response.data)
+            let userInfo = null
+            if (response.result === 'success') {
+              userInfo = JSON.parse(response.data)
+            }
             resolve(userInfo)
           })
         }
