@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-
+    <text>新的朋友</text>
   </div>
 </template>
 

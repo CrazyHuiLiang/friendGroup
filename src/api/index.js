@@ -3,6 +3,25 @@ const storage = weex.requireModule('storage')
 const stream = weex.requireModule('stream')
 const host = ''
 
+// 封装发送get请求的方法
+function get (url, processHandler) {
+  return new Promise((resolve, reject) => {
+    stream.fetch({
+      method: 'GET',
+      url,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      type: 'json'
+    }, function (ret) {
+      if (ret.ok) {
+        resolve(ret)
+      } else {
+        reject(ret)
+      }
+    }, processHandler)
+  })
+}
 // 封装发送post请求的方法
 function post (url, body, processHandler) {
   return new Promise((resolve, reject) => {
@@ -46,6 +65,13 @@ export function register (account, password) {
     account,
     password
   })
+}
+/*
+  获取通讯录/我的好友
+  userId: 当前登录用户的userId
+ */
+export function getFriendsList (userId) {
+  return get(host + `/api/getFriends?userId=${userId}`)
 }
 
 /*
