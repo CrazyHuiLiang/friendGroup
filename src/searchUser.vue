@@ -1,30 +1,109 @@
 <template>
   <div class="wrapper">
-
+    <wxc-minibar title="添加朋友"
+                 background-color="#009ff0"
+                 text-color="#FFFFFF"
+                 @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
+                 @wxcMinibarRightButtonClicked="minibarRightButtonClick"></wxc-minibar>
+    <wxc-searchbar ref="wxc-searchbar"
+                   @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
+                   @wxcSearchbarInputReturned="wxcSearchbarInputReturned"></wxc-searchbar>
+    <div>
+      <text v-if="user===null" class="no-user">请输入好友账号进行搜索</text>
+      <div v-else class="user">
+        <image style="width:50px;height:50px" :src="user.avatar"></image>
+        <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
+        <wxc-button text="添加好友" type='blue' size='small' @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { WxcButton } from 'weex-ui'
+import {
+  WxcButton,
+  WxcMinibar,
+  WxcSearchbar
+} from 'weex-ui'
+import {
+  searchUserWithAccount,
+  addFriendWithUserId
+} from './api/index'
+import store from './store/index'
+const modal = weex.requireModule('modal')
+// const navigator = weex.requireModule('navigator')
+
 export default {
   name: '',
   props: {
   },
   data () {
     return {
+      searchKey: '',
+      user: null
     }
   },
   mounted () {
   },
   methods: {
+    minibarLeftButtonClick () {
+      // navigator.pop()
+    },
+    minibarRightButtonClick () {
+      modal.toast({ 'message': 'click rightButton!', 'duration': 1 })
+    },
+    wxcSearchbarCancelClicked () {
+    },
+    wxcSearchbarInputReturned (e) {
+      searchUserWithAccount(e.value).then(({data}) => {
+        if (data.state) {
+          this.user = data.info[0]
+        } else {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          })
+        }
+      }, error => {
+        console.log(error)
+      })
+    },
+    wxcButtonClicked (e) {
+      store.dispatch('getUserInfo').then(userInfo => {
+        return addFriendWithUserId(userInfo.id, this.user.id)
+      }).then(({ data }) => {
+        if (data.state) {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          })
+        }
+      }, error => {
+        console.log(error)
+      })
+    }
   },
   components: {
-    WxcButton
+    WxcButton,
+    WxcMinibar,
+    WxcSearchbar
   }
 }
 </script>
 
 <style scoped>
   .wrapper {
+  }
+  .no-user {
+    text-align: center;
+    margin-top: 100px;
+  }
+  .user {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    flex-direction: row;
+    justify-content: space-between;
   }
 </style>

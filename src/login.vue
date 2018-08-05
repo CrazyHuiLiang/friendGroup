@@ -21,7 +21,9 @@ import {
   WxcButton,
   WxcCell
 } from 'weex-ui'
-import { login } from './api/index'
+import {
+  login
+} from './api/index'
 import store from './store/index'
 import {getEntryUrl} from './util/util'
 const navigator = weex.requireModule('navigator')

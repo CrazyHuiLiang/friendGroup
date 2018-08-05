@@ -5,7 +5,9 @@
 </template>
 
 <script>
-import { WxcButton } from 'weex-ui'
+import {
+  WxcButton
+} from 'weex-ui'
 export default {
   name: '',
   props: {
