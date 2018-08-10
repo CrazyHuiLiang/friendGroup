@@ -11,6 +11,7 @@ export default {
     // 设置用户信息
     setUserInfo (state, userInfo) {
       state.userInfo = userInfo
+      console.log('setUserInfo', userInfo)
       storage.setItem(UserInfoKey, JSON.stringify(userInfo))
     }
   },

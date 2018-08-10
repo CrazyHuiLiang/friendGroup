@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 276);
+/******/ 	return __webpack_require__(__webpack_require__.s = 272);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26944,10 +26944,145 @@ exports.default = {
 /* 249 */,
 /* 250 */,
 /* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* styles */
+__vue_styles__.push(__webpack_require__(253)
+)
+
+/* script */
+__vue_exports__ = __webpack_require__(254)
+
+/* template */
+var __vue_template__ = __webpack_require__(255)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/Tab.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-5d8cbf70"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "home-tab": {
+    "width": "750",
+    "height": "100",
+    "alignItems": "center",
+    "justifyContent": "space-around",
+    "flexDirection": "row",
+    "backgroundColor": "#f2f3f4",
+    "borderTopStyle": "solid",
+    "borderTopColor": "#cccccc",
+    "borderTopWidth": "2"
+  },
+  "active-title": {
+    "color": "#0000FF"
+  }
+}
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  props: {
+    activeIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  created: function created() {},
+
+  methods: {
+    tabClicked: function tabClicked(index) {
+      // this.activeIndex = index
+      this.$emit('tabClicked', index);
+    }
+  },
+  components: {}
+};
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["home-tab"]
+  }, [_c('div', {
+    staticClass: ["tab-item"],
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(0)
+      }
+    }
+  }, [_c('text', {
+    staticClass: ["title"],
+    class: [_vm.activeIndex === 0 ? 'active-title' : '']
+  }, [_vm._v("通讯录")])]), _c('div', {
+    staticClass: ["tab-item"],
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(1)
+      }
+    }
+  }, [_c('text', {
+    staticClass: ["title"],
+    class: [_vm.activeIndex === 1 ? 'active-title' : '']
+  }, [_vm._v("我的")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
 /* 256 */,
 /* 257 */,
 /* 258 */,
@@ -26964,25 +27099,21 @@ exports.default = {
 /* 269 */,
 /* 270 */,
 /* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(277)
+__vue_styles__.push(__webpack_require__(273)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(278)
+__vue_exports__ = __webpack_require__(274)
 
 /* template */
-var __vue_template__ = __webpack_require__(279)
+var __vue_template__ = __webpack_require__(275)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -26994,10 +27125,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/login.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/friendList.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-41c54025"
+__vue_options__._scopeId = "data-v-bc453e60"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -27014,20 +27145,41 @@ new Vue(module.exports)
 
 
 /***/ }),
-/* 277 */
+/* 273 */
 /***/ (function(module, exports) {
 
 module.exports = {
-  "title": {
-    "fontSize": "80",
-    "textAlign": "center",
-    "marginTop": "100",
-    "marginBottom": "100"
+  "tab": {
+    "position": "fixed",
+    "right": 0,
+    "bottom": 0,
+    "left": 0
+  },
+  "new-friend": {
+    "width": "750",
+    "height": "80",
+    "fontSize": "30",
+    "background": "#dddddd"
+  },
+  "new-frined-text": {
+    "lineHeight": "80",
+    "textAlign": "center"
+  },
+  "friend": {
+    "paddingTop": "30",
+    "paddingRight": "30",
+    "paddingBottom": "30",
+    "paddingLeft": "30",
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "borderBottomStyle": "solid",
+    "borderBottomWidth": "1",
+    "borderBottomColor": "#dddddd"
   }
 }
 
 /***/ }),
-/* 278 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27039,16 +27191,23 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(15);
 
-var _index = __webpack_require__(243);
+var _index = __webpack_require__(244);
 
-var _index2 = __webpack_require__(244);
+var _index2 = _interopRequireDefault(_index);
 
-var _index3 = _interopRequireDefault(_index2);
+var _Tab = __webpack_require__(252);
+
+var _Tab2 = _interopRequireDefault(_Tab);
 
 var _util = __webpack_require__(14);
 
+var _index3 = __webpack_require__(243);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var navigator = weex.requireModule('navigator'); //
+//
+//
 //
 //
 //
@@ -27068,67 +27227,62 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var navigator = weex.requireModule('navigator');
-var modal = weex.requireModule('modal');
 exports.default = {
-  name: 'login',
+  name: '',
   data: function data() {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      friendsList: []
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    _index3.default.dispatch('getUserInfo').then(function (userInfo) {
-      if (userInfo) {
-        _this.gotoFriendList();
-      }
-    });
+  created: function created() {
+    this.loadFiendsList();
   },
 
   methods: {
-    login: function login(e) {
-      var _this2 = this;
-
-      if (!this.account || this.account.length === 0) {
-        modal.toast({
-          message: '请输入账号'
-        });
-      } else if (!this.password || this.password.length === 0) {
-        modal.toast({
-          message: '请输入密码'
-        });
-      } else {
-        (0, _index.login)(this.account, this.password).then(function (_ref) {
-          var data = _ref.data;
-
-          if (data.state === true) {
-            console.log('login', data);
-            _index3.default.commit('setUserInfo', data.info);
-            _this2.gotoFriendList();
-          } else {
-            modal.toast({
-              message: data.info
-            });
-          }
-        }, function (error) {
-          console.log(error);
+    tabClicked: function tabClicked(index) {
+      if (index === 1) {
+        navigator.push({
+          url: (0, _util.getEntryUrl)('userCenter'),
+          animated: 'true'
+        }, function (event) {
+          // modal.toast({ message: 'callback: ' + event })
         });
       }
     },
-    gotoRegister: function gotoRegister(e) {
+    gotoSearchUser: function gotoSearchUser() {
       navigator.push({
-        url: (0, _util.getEntryUrl)('register'),
+        url: (0, _util.getEntryUrl)('searchUser'),
         animated: 'true'
       }, function (event) {
         // modal.toast({ message: 'callback: ' + event })
       });
     },
-    gotoFriendList: function gotoFriendList(e) {
+    gotoNewFriend: function gotoNewFriend() {
       navigator.push({
-        url: (0, _util.getEntryUrl)('friendList'),
+        url: (0, _util.getEntryUrl)('newFriend'),
+        animated: 'true'
+      }, function (event) {
+        // modal.toast({ message: 'callback: ' + event })
+      });
+    },
+    loadFiendsList: function loadFiendsList() {
+      var _this = this;
+
+      _index2.default.dispatch('getUserInfo').then(function (userInfo) {
+        return (0, _index3.getFriendsList)(userInfo.id);
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.state) {
+          _this.friendsList = data.info;
+        }
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    userClicked: function userClicked(user) {
+      navigator.push({
+        url: (0, _util.getEntryUrl)('album'),
         animated: 'true'
       }, function (event) {
         // modal.toast({ message: 'callback: ' + event })
@@ -27136,68 +27290,69 @@ exports.default = {
     }
   },
   components: {
+    Tab: _Tab2.default,
     WxcButton: _weexUi.WxcButton,
-    WxcCell: _weexUi.WxcCell
+    WxcMinibar: _weexUi.WxcMinibar
   }
 };
 
 /***/ }),
-/* 279 */
+/* 275 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
+  }, [_c('wxc-minibar', {
+    attrs: {
+      "title": "通讯录",
+      "backgroundColor": "#111111",
+      "textColor": "#FFFFFF",
+      "leftText": "",
+      "rightText": "搜索"
+    },
+    on: {
+      "wxcMinibarRightButtonClicked": _vm.gotoSearchUser
+    }
+  }), _c('div', {
+    staticClass: ["new-friend"],
+    on: {
+      "click": _vm.gotoNewFriend
+    }
   }, [_c('text', {
-    staticClass: ["title"]
-  }, [_vm._v("登录")]), _c('wxc-cell', {
-    attrs: {
-      "label": "账号",
-      "hasArrow": false,
-      "hasMargin": true
-    }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写账号",
-      "value": (_vm.account)
-    },
-    on: {
-      "input": function($event) {
-        _vm.account = $event.target.attr.value
+    staticClass: ["new-frined-text"]
+  }, [_vm._v("新的朋友")])]), _c('div', {
+    staticClass: ["friend-list"]
+  }, _vm._l((_vm.friendsList), function(user) {
+    return _c('div', {
+      key: user.id,
+      staticClass: ["friend"],
+      on: {
+        "click": function($event) {
+          _vm.userClicked(user)
+        }
       }
-    },
-    slot: "title"
-  })]), _c('wxc-cell', {
-    attrs: {
-      "label": "密码",
-      "hasArrow": false,
-      "hasMargin": true
-    }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写密码",
-      "type": "password",
-      "value": (_vm.password)
-    },
-    on: {
-      "input": function($event) {
-        _vm.password = $event.target.attr.value
+    }, [_c('image', {
+      staticStyle: {
+        width: "50px",
+        height: "50px"
+      },
+      attrs: {
+        "src": user.avatar
       }
-    },
-    slot: "title"
-  })]), _c('text', {
-    on: {
-      "click": _vm.gotoRegister
-    }
-  }, [_vm._v("还没有账号")]), _c('WxcButton', {
+    }), _c('text', {
+      staticStyle: {
+        flex: "1",
+        marginLeft: "20px"
+      }
+    }, [_vm._v(_vm._s(user.nickname))])])
+  })), _c('tab', {
+    staticClass: ["tab"],
     attrs: {
-      "type": "blue",
-      "text": "登录"
+      "activeIndex": 0
     },
     on: {
-      "wxcButtonClicked": _vm.login
+      "tabClicked": _vm.tabClicked
     }
   })], 1)
 },staticRenderFns: []}

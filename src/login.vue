@@ -30,7 +30,6 @@ const navigator = weex.requireModule('navigator')
 const modal = weex.requireModule('modal')
 export default {
   name: 'login',
-  store,
   data () {
     return {
       account: 'crazyhuiliang',
@@ -38,7 +37,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getUserInfo').then(userInfo => {
+    store.dispatch('getUserInfo').then(userInfo => {
       if (userInfo) {
         this.gotoFriendList()
       }
@@ -57,7 +56,8 @@ export default {
       } else {
         login(this.account, this.password).then(({data}) => {
           if (data.state === true) {
-            this.$store.commit('setUserInfo', data.info)
+            console.log('login', data)
+            store.commit('setUserInfo', data.info)
             this.gotoFriendList()
           } else {
             modal.toast({

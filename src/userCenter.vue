@@ -16,8 +16,8 @@
 
       <div class='entry-wrap'>
         <text class="entry-row" @click="gotoFriendGroup">朋友圈</text>
-        <text class="entry-row">相册</text>
-        <text class="entry-row">个人设置</text>
+        <text class="entry-row" @click="gotoAlbum">相册</text>
+        <text class="entry-row" @click="gotoUserSetting">个人设置</text>
       </div>
 
       <text class="logout" @click="logout">退出登录</text>
@@ -49,6 +49,7 @@ export default {
     })
   },
   methods: {
+    // 切换tab
     tabClicked (index) {
       if (index === 0) {
         navigator.push({
@@ -59,6 +60,7 @@ export default {
         })
       }
     },
+    // 跳转到朋友圈
     gotoFriendGroup () {
       navigator.push({
         url: getEntryUrl('friendGroup'),
@@ -67,6 +69,24 @@ export default {
         // modal.toast({ message: 'callback: ' + event })
       })
     },
+    // 跳转到个人相册
+    gotoAlbum () {
+      navigator.push({
+        url: getEntryUrl('album'),
+        animated: 'true'
+      }, event => {
+        // modal.toast({ message: 'callback: ' + event })
+      })
+    },
+    gotoUserSetting () {
+      navigator.push({
+        url: getEntryUrl('userSetting'),
+        animated: 'true'
+      }, event => {
+        // modal.toast({ message: 'callback: ' + event })
+      })
+    },
+    // 退出登录
     logout () {
       console.log('logout')
     }

@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 309);
+/******/ 	return __webpack_require__(__webpack_require__.s = 321);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -20695,6 +20695,319 @@ function getEntryUrl(name) {
 
 /***/ }),
 
+/***/ 295:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+exports.login = login;
+exports.register = register;
+exports.getFriendsList = getFriendsList;
+exports.searchUserWithAccount = searchUserWithAccount;
+exports.addFriendWithUserId = addFriendWithUserId;
+exports.selectAddMyFriendRequest = selectAddMyFriendRequest;
+exports.updateAddFriendRequest = updateAddFriendRequest;
+exports.removeFriend = removeFriend;
+exports.uploadFile = uploadFile;
+exports.setUserAvatar = setUserAvatar;
+exports.setNickname = setNickname;
+exports.addNew = addNew;
+exports.listFriendsGroup = listFriendsGroup;
+exports.listUserAlbum = listUserAlbum;
+exports.praiseNew = praiseNew;
+exports.addComment = addComment;
+exports.getUserInfo = getUserInfo;
+exports.updateUserInfo = updateUserInfo;
+exports.getMessageList = getMessageList;
+
+var _util = __webpack_require__(24);
+
+var storage = weex.requireModule('storage');
+var stream = weex.requireModule('stream');
+var host = 'http://127.0.0.1:3000';
+
+// 封装发送get请求的方法
+function get(url, processHandler) {
+  return new Promise(function (resolve, reject) {
+    stream.fetch({
+      method: 'GET',
+      url: url,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      type: 'json'
+    }, function (ret) {
+      if (ret.ok) {
+        resolve(ret);
+      } else {
+        reject(ret);
+      }
+    }, processHandler);
+  });
+}
+// 封装发送post请求的方法
+function post(url, body, processHandler) {
+  return new Promise(function (resolve, reject) {
+    stream.fetch({
+      method: 'POST',
+      url: url,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+      type: 'json'
+    }, function (ret) {
+      if (ret.ok) {
+        resolve(ret);
+      } else {
+        reject(ret);
+      }
+    }, processHandler);
+  });
+}
+/*
+  登录
+  account: 账号
+  password： 密码
+  return Promise
+ */
+function login(account, password) {
+  return post(host + '/api/login', {
+    account: account,
+    password: password
+  });
+}
+/*
+  注册
+  account: 账号
+  password： 密码
+  return Promise
+ */
+function register(account, password) {
+  return post(host + '/api/register', {
+    account: account,
+    password: password
+  });
+}
+/*
+  获取通讯录/我的好友
+  userId: 当前登录用户的userId
+ */
+function getFriendsList(userId) {
+  return get(host + ('/api/getFriends?userId=' + userId));
+}
+
+/*
+  根据用户账号查找用户
+  account: 要搜索的用户账号
+ */
+function searchUserWithAccount(account) {
+  return get(host + ('/api/searchUserWithAccount?account=' + account));
+}
+
+/*
+  申请添加好友
+  userId: 当前用户id
+  friendId： 要添加的用户id
+  return Promise
+ */
+function addFriendWithUserId(userId, friendId) {
+  return post(host + '/api/addFriendWithUserId', {
+    userId: userId,
+    friendId: friendId
+  });
+}
+
+/*
+  查看添加我的好友的申请
+  userId: 当前用户id
+ */
+function selectAddMyFriendRequest(userId) {
+  return get(host + ('/api/selectAddMyFriendRequest?userId=' + userId));
+}
+/*
+  处理添加我的好友的申请
+  userId: 当前用户id
+  friendId： 要添加的用户id
+  flag: 0 waiting , 1 agree， 2 disagree
+  return Promise
+ */
+function updateAddFriendRequest(userId, friendId, flag) {
+  return post(host + '/api/updateAddFriendRequest', {
+    userId: userId,
+    friendId: friendId,
+    flag: flag
+  });
+}
+
+/*
+  删除好友
+  userId: 当前用户id
+  friendId： 要添加的用户id
+  return Promise
+ */
+function removeFriend(userId, friendId) {
+  return post(host + '/api/removeFriend', {
+    userId: userId,
+    friendId: friendId
+  });
+}
+/*
+  上传文件
+  return Promise
+ */
+function uploadFile(file) {
+  return post(host + '/api/uploadFile', {
+    file: file
+  });
+}
+
+/*
+  设置用户头像
+  userId: 当前用户id
+  url： 头像url
+  return Promise
+ */
+function setUserAvatar(userId, url) {
+  return post(host + '/api/setUserAvatar', {
+    userId: userId,
+    url: url
+  });
+}
+
+/*
+  设置用户昵称
+  userId: 当前用户id
+  nickname：
+  return Promise
+ */
+function setNickname(userId, nickname) {
+  return post(host + '/api/setNickname', {
+    userId: userId,
+    nickname: nickname
+  });
+}
+/*
+  发朋友圈
+  userId: 当前用户id
+  nickname：
+  return Promise
+ */
+function addNew(userId, content, images) {
+  return post(host + '/api/addNew', {
+    userId: userId,
+    content: content,
+    images: images
+  });
+}
+
+/*
+  获取朋友圈列表
+  userId: 当前用户id
+ */
+function listFriendsGroup(userId) {
+  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+  return get(host + ('/api/listFriendsGroup?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
+}
+/*
+  获取个人相册列表
+  userId: 当前用户id
+ */
+function listUserAlbum(userId) {
+  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+
+  return get(host + ('/api/listUserAlbum?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
+}
+/*
+  点赞/取消点赞
+  userId: 当前用户id
+  newId：被点赞的朋友圈消息的ID
+  return Promise
+ */
+function praiseNew(userId, newId) {
+  return post(host + '/api/praiseNew', {
+    userId: userId,
+    newId: newId
+  });
+}
+/*
+  评论
+  userId: 当前用户id
+  newId：被点赞的朋友圈消息的ID
+  parentCommentId: 如果是对朋友圈下面的评论进行回复，需要传入所要回复的评论Id
+  comment: 评论内容
+  return Promise
+ */
+function addComment(userId, newsId, parentCommentId, comment) {
+  return post(host + '/api/addComment', {
+    userId: userId,
+    newsId: newsId,
+    parentCommentId: parentCommentId,
+    comment: comment
+  });
+}
+// ------------------------------------分割线----------------------------------------------
+/*
+* 用户信息
+* */
+var UserInfoKey = 'UserInfoKey';
+var defaultUserInfo = {
+  nickName: '点我编辑昵称',
+  avatar: (0, _util.getImagePath)('defaultAvatar', '.png'), // 'http://7xt2se.com1.z0.glb.clouddn.com/zhl-avatar.jpeg',
+  background: (0, _util.getImagePath)('defaultBackground', '.png') // 'https://img.zcool.cn/community/01ee3b5b1124f0a801212d57af516c.jpg@1280w_1l_2o_100sh.jpg'
+
+
+  /*
+  * 获取用户信息
+  * */
+};function getUserInfo(callback) {
+  storage.getItem(UserInfoKey, function (event) {
+    var userInfo = void 0;
+    if (event.data === 'undefined') {
+      userInfo = defaultUserInfo;
+    } else {
+      userInfo = JSON.parse(event.data);
+    }
+    callback(userInfo);
+  });
+}
+
+/*
+* 更改用户信息
+* info: 类似上面defaultUserInfo的结构
+* */
+function updateUserInfo(info, callback) {
+  getUserInfo(function (userInfo) {
+    var newInfo = _extends({}, userInfo, info);
+    storage.setItem(UserInfoKey, JSON.stringify(newInfo), function (r) {
+      callback(newInfo);
+    });
+  });
+}
+
+/*
+* 获取朋友圈列表
+* */
+function getMessageList(callback) {
+  var list = [{
+    content: '太漂亮了',
+    images: ['https://img.zcool.cn/community/01f3445b1a45a5a8012034f7fbe6a7.jpg@1280w_1l_2o_100sh.jpg']
+  }];
+  callback(list);
+}
+
+/***/ }),
+
 /***/ 299:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20917,7 +21230,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 309:
+/***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20947,35 +21260,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _weexVueRender2.default.init(_vue2.default);
 
-var App = __webpack_require__(310);
+var App = __webpack_require__(322);
 App.el = '#root';
 new _vue2.default(App);
 
 /***/ }),
 
-/***/ 310:
+/***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(311)
+  __webpack_require__(323)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(313),
+  __webpack_require__(325),
   /* template */
-  __webpack_require__(314),
+  __webpack_require__(331),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-4dfeba4a",
+  "data-v-2f871f2a",
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/add.vue"
+Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/friendGroup.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] add.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] friendGroup.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -20984,9 +21297,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4dfeba4a", Component.options)
+    hotAPI.createRecord("data-v-2f871f2a", Component.options)
   } else {
-    hotAPI.reload("data-v-4dfeba4a", Component.options)
+    hotAPI.reload("data-v-2f871f2a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -20998,23 +21311,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 311:
+/***/ 323:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(312);
+var content = __webpack_require__(324);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("4e10f061", content, false, {});
+var update = __webpack_require__(2)("0cff6106", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4dfeba4a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./add.vue", function() {
-     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4dfeba4a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./add.vue");
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f871f2a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./friendGroup.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-2f871f2a\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./friendGroup.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -21025,7 +21338,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 312:
+/***/ 324:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -21033,14 +21346,14 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-4dfeba4a] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.header[data-v-4dfeba4a] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 750px;\n  height: 100px;\n  background-color: #373a3f;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  -ms-flex-pack: justify;\n      justify-content: space-between;\n  -ms-flex-align: center;\n      align-items: center;\n  padding-left: 20px;\n  padding-right: 20px;\n}\n.back-container[data-v-4dfeba4a] {\n  -ms-flex: 1;\n      flex: 1;\n  width: 100px;\n  height: 36px;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  -ms-flex-align: center;\n      align-items: center;\n}\n.back-icon[data-v-4dfeba4a] {\n  width: 20px;\n  height: 35px;\n}\n.back-title[data-v-4dfeba4a] {\n  margin-left: 15px;\n  color: #ffffff;\n}\n.title[data-v-4dfeba4a] {\n  -ms-flex: 2;\n      flex: 2;\n  color: #ffffff;\n  text-align: center;\n}\n.add-message-container[data-v-4dfeba4a] {\n  -ms-flex: 1;\n      flex: 1;\n  /*justify-content: flex-end;*/\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n}\n.add-message[data-v-4dfeba4a] {\n  width: 46px;\n  height: 36px;\n}\n.page-content[data-v-4dfeba4a] {\n  width: 750px;\n  height: 1335px;\n  /*background: gray;*/\n}\n.user-background[data-v-4dfeba4a] {\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-4dfeba4a] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  top: -100px;\n  right: 20px;\n}\n.avatar[data-v-4dfeba4a] {\n  width: 150px;\n  height: 150px;\n  border-style: solid;\n  border-color: #ffffff;\n  border-width: 4px;\n}\n.nickname[data-v-4dfeba4a] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-2f871f2a] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.header[data-v-2f871f2a] {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 750px;\n  height: 100px;\n  background-color: #373a3f;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  -ms-flex-pack: justify;\n      justify-content: space-between;\n  -ms-flex-align: center;\n      align-items: center;\n  padding-left: 20px;\n  padding-right: 20px;\n}\n.is-ios-header[data-v-2f871f2a] {\n  top: -50px;\n  padding-top: 30px;\n  height: 130px;\n}\n.back-container[data-v-2f871f2a] {\n  -ms-flex: 1;\n      flex: 1;\n  width: 100px;\n  height: 36px;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  -ms-flex-align: center;\n      align-items: center;\n}\n.back-icon[data-v-2f871f2a] {\n  width: 20px;\n  height: 35px;\n}\n.back-title[data-v-2f871f2a] {\n  margin-left: 15px;\n  color: #ffffff;\n}\n.title[data-v-2f871f2a] {\n  -ms-flex: 2;\n      flex: 2;\n  color: #ffffff;\n  text-align: center;\n}\n.add-message-container[data-v-2f871f2a] {\n  -ms-flex: 1;\n      flex: 1;\n  /*justify-content: flex-end;*/\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n}\n.add-message[data-v-2f871f2a] {\n  width: 46px;\n  height: 36px;\n}\n.page-content[data-v-2f871f2a] {\n  width: 750px;\n  height: 1335px;\n  /*background: gray;*/\n}\n.user-background[data-v-2f871f2a] {\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-2f871f2a] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  margin-top: -100px;\n  margin-right: 20px;\n}\n.avatar-container[data-v-2f871f2a] {\n  width: 150px;\n  height: 150px;\n  background-color: #ffffff;\n  padding-top: 4px;\n  padding-right: 4px;\n  padding-bottom: 4px;\n  padding-left: 4px;\n  border-style: solid;\n  border-color: #cccccc;\n  border-width: 2px;\n}\n.avatar[data-v-2f871f2a] {\n  width: 138px;\n  height: 138px;\n}\n.nickname[data-v-2f871f2a] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n.message-container[data-v-2f871f2a] {\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 313:
+/***/ 325:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21051,6 +21364,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _util = __webpack_require__(24);
+
+var _index = __webpack_require__(295);
+
+var _ImagePicker = __webpack_require__(326);
+
+var _ImagePicker2 = _interopRequireDefault(_ImagePicker);
 
 var _Message = __webpack_require__(299);
 
@@ -21085,78 +21404,292 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 var navigator = weex.requireModule('navigator');
+var modal = weex.requireModule('modal');
+
 exports.default = {
-  name: 'Add',
+  name: 'App',
   data: function data() {
     return {
       ui: {
         back: (0, _util.getImagePath)('back', '.png'),
         addMassage: (0, _util.getImagePath)('addMessage', '.png')
       },
-      userInfo: {
-        nickname: '点我更改昵称',
-        avatar: (0, _util.getImagePath)('defaultAvatar', '.png'),
-        background: (0, _util.getImagePath)('defaultBackground', '.png')
-      },
+      platform: weex.config.env.platform.toLowerCase(),
+      userInfo: null,
       list: []
     };
   },
   mounted: function mounted() {
-    this.list = ['', ''];
+    var _this = this;
+
+    (0, _index.getUserInfo)(function (response) {
+      _this.userInfo = response;
+    });
+    (0, _index.getMessageList)(function (response) {
+      _this.list = response;
+    });
   },
 
   methods: {
-    goBack: function goBack() {
-      navigator.pop({
-        animated: 'true'
-      });
-    },
     gotoAddMessage: function gotoAddMessage() {
       navigator.push({
-        url: 'http://dotwe.org/raw/dist/519962541fcf6acd911986357ad9c2ed.js',
+        url: (0, _util.getEntryUrl)('add'),
         animated: 'true'
       }, function (event) {
         // modal.toast({ message: 'callback: ' + event })
       });
+    },
+    nickNameClicked: function nickNameClicked() {
+      var _this2 = this;
+
+      modal.prompt({
+        message: '请输入您的昵称',
+        okTitle: '确定',
+        cancelTitle: '取消'
+      }, function (r) {
+        if (r.result === '确定') {
+          (0, _index.updateUserInfo)({ nickName: r.data }, function (newInfo) {
+            _this2.userInfo = newInfo;
+          });
+        }
+      });
+    },
+    userBackgroundClicked: function userBackgroundClicked() {
+      var _this3 = this;
+
+      var imagePicker = this.$refs.imagePicker;
+      imagePicker.pick(function (url) {
+        (0, _index.updateUserInfo)({ background: url }, function (newInfo) {
+          _this3.userInfo = newInfo;
+        });
+      });
+    },
+    userAvatarClicked: function userAvatarClicked() {
+      var _this4 = this;
+
+      var imagePicker = this.$refs.imagePicker;
+      imagePicker.pick(function (url) {
+        (0, _index.updateUserInfo)({ avatar: url }, function (newInfo) {
+          _this4.userInfo = newInfo;
+        });
+      });
     }
   },
   components: {
+    ImagePicker: _ImagePicker2.default,
     Message: _Message2.default
   }
 };
 
 /***/ }),
 
-/***/ 314:
+/***/ 326:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(327)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(329),
+  /* template */
+  __webpack_require__(330),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/ImagePicker.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ImagePicker.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-994638d2", Component.options)
+  } else {
+    hotAPI.reload("data-v-994638d2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 327:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(328);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("77f5ac8c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-994638d2\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ImagePicker.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-994638d2\",\"scoped\":false,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ImagePicker.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 328:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 329:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+
+var modal = weex.requireModule('modal');
+var imagePicker = weex.requireModule('imagePicker');
+exports.default = {
+  name: 'ImagePicker',
+  methods: {
+    pick: function pick(callback) {
+      if (WXEnvironment.platform === 'Web') {
+        this.webPick(callback);
+      } else if (WXEnvironment.platform === 'android') {
+        modal.toast({ message: '功能即将上线，敬请期待' });
+      } else {
+        imagePicker.pick(function (data) {
+          var url = data; // 'data:image/jpeg;base64,' + data
+          callback(url);
+        });
+      }
+    },
+    webPick: function webPick(callback) {
+      var imagePicker = document.querySelector('.image-picker');
+      var input = document.createElement('input');
+      input.accept = 'image/jpeg, image/gif, image/png';
+      input.type = 'file';
+      imagePicker.appendChild(input);
+      input.onchange = function (e) {
+        var files = input.files;
+        if (files.length > 0) {
+          var file = files[0];
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function () {
+            imagePicker.removeChild(input);
+            callback(reader.result);
+          };
+        }
+      };
+      var clickEvent = document.createEvent('MouseEvents');
+      clickEvent.initMouseEvent('click');
+      input.dispatchEvent(clickEvent);
+    }
+  }
+};
+
+/***/ }),
+
+/***/ 330:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "image-picker",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "hidden": ""
+    }
+  })
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-994638d2", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 331:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "wrapper",
+    class: [_vm.platform === 'ios' ? 'is-ios' : ''],
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
   }, [_c('div', {
     staticClass: "header",
+    class: [_vm.platform === 'ios' ? 'is-ios-header' : ''],
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
   }, [_c('div', {
     staticClass: "back-container",
     staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('image', {
+    staticClass: "back-icon",
+    staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
-    on: {
-      "click": _vm.goBack
+    attrs: {
+      "src": _vm.ui.back,
+      "resize": "cover"
     }
-  }, [_c('text', {
+  }), _vm._v(" "), _c('text', {
     staticClass: "back-title",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v("取消")])]), _vm._v(" "), _c('text', {
+  }, [_vm._v("发现")])]), _vm._v(" "), _c('text', {
     staticClass: "title",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v("发朋友圈")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("朋友圈")]), _vm._v(" "), _c('div', {
     staticClass: "add-message-container",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
@@ -21170,17 +21703,73 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.ui.addMassage
     }
-  })])]), _vm._v(" "), _c('scroller', {
+  })])]), _vm._v(" "), (_vm.userInfo) ? _c('scroller', {
     staticClass: "page-content",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")]), _vm._v(" "), _c('text', [_vm._v("添加朋友圈")])])], 1)
+  }, [_c('image', {
+    staticClass: "user-background",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "src": _vm.userInfo.background
+    },
+    on: {
+      "click": _vm.userBackgroundClicked
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "user-info-container",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "avatar-container",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('image', {
+    staticClass: "avatar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "src": _vm.userInfo.avatar
+    },
+    on: {
+      "click": _vm.userAvatarClicked
+    }
+  })]), _vm._v(" "), _c('text', {
+    staticClass: "nickname",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.nickNameClicked
+    }
+  }, [_vm._v(_vm._s(_vm.userInfo.nickName))])]), _vm._v(" "), _c('div', {
+    staticClass: "message-container",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, _vm._l((_vm.list), function(item, index) {
+    return _c('Message', {
+      key: index,
+      ref: 'item' + index,
+      refInFor: true,
+      staticClass: "row",
+      staticStyle: _vm.$processStyle(undefined),
+      style: (_vm.$processStyle(undefined)),
+      attrs: {
+        "userInfo": _vm.userInfo,
+        "message": item
+      }
+    })
+  }))]) : _vm._e(), _vm._v(" "), _c('image-picker', {
+    ref: "imagePicker",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4dfeba4a", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2f871f2a", module.exports)
   }
 }
 

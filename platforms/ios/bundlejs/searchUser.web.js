@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 356);
+/******/ 	return __webpack_require__(__webpack_require__.s = 362);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -41190,7 +41190,13 @@ exports.default = {
 /* 353 */,
 /* 354 */,
 /* 355 */,
-/* 356 */
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41220,34 +41226,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _weexVueRender2.default.init(_vue2.default);
 
-var App = __webpack_require__(357);
+var App = __webpack_require__(363);
 App.el = '#root';
 new _vue2.default(App);
 
 /***/ }),
-/* 357 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(358)
+  __webpack_require__(364)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(360),
+  __webpack_require__(366),
   /* template */
-  __webpack_require__(361),
+  __webpack_require__(367),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-5e9222ca",
+  "data-v-6247b40c",
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/register.vue"
+Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/searchUser.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] register.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] searchUser.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -41256,9 +41262,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5e9222ca", Component.options)
+    hotAPI.createRecord("data-v-6247b40c", Component.options)
   } else {
-    hotAPI.reload("data-v-5e9222ca", Component.options)
+    hotAPI.reload("data-v-6247b40c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41269,23 +41275,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 358 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(359);
+var content = __webpack_require__(365);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("5b97d8f5", content, false, {});
+var update = __webpack_require__(2)("9625019c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9222ca\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./register.vue", function() {
-     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9222ca\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./register.vue");
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6247b40c\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./searchUser.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6247b40c\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./searchUser.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -41295,7 +41301,7 @@ if(false) {
 }
 
 /***/ }),
-/* 359 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -41303,13 +41309,13 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-5e9222ca] {\n}\n.title[data-v-5e9222ca] {\n  font-size: 80px;\n  text-align: center;\n  margin-top: 100px;\n  margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-6247b40c] {\n}\n.no-user[data-v-6247b40c] {\n  text-align: center;\n  margin-top: 100px;\n}\n.user[data-v-6247b40c] {\n  padding-top: 30px;\n  padding-right: 30px;\n  padding-bottom: 30px;\n  padding-left: 30px;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  -ms-flex-pack: justify;\n      justify-content: space-between;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 360 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41329,8 +41335,13 @@ var _index3 = _interopRequireDefault(_index2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import {getEntryUrl} from './util/util'
-var navigator = weex.requireModule('navigator'); //
+var modal = weex.requireModule('modal');
+// const navigator = weex.requireModule('navigator')
+
+//
+//
+//
+//
 //
 //
 //
@@ -41349,66 +41360,71 @@ var navigator = weex.requireModule('navigator'); //
 //
 //
 
-var modal = weex.requireModule('modal');
 exports.default = {
-  name: 'login',
-  store: _index3.default,
+  name: '',
+  props: {},
   data: function data() {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      searchKey: '',
+      user: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.$store.dispatch('getUserInfo').then(function (userInfo) {
-      if (userInfo) {
-        _this.gotoFriendList();
-      }
-    });
-  },
+  mounted: function mounted() {},
 
   methods: {
-    register: function register(e) {
+    minibarLeftButtonClick: function minibarLeftButtonClick() {
+      // navigator.pop()
+    },
+    minibarRightButtonClick: function minibarRightButtonClick() {
+      modal.toast({ 'message': 'click rightButton!', 'duration': 1 });
+    },
+    wxcSearchbarCancelClicked: function wxcSearchbarCancelClicked() {},
+    wxcSearchbarInputReturned: function wxcSearchbarInputReturned(e) {
+      var _this = this;
+
+      (0, _index.searchUserWithAccount)(e.value).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.state) {
+          _this.user = data.info[0];
+        } else {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          });
+        }
+      }, function (error) {
+        console.log(error);
+      });
+    },
+    wxcButtonClicked: function wxcButtonClicked(e) {
       var _this2 = this;
 
-      if (!this.account || this.account.length === 0) {
-        modal.toast({
-          message: '请输入账号'
-        });
-      } else if (!this.password || this.password.length === 0) {
-        modal.toast({
-          message: '请输入密码'
-        });
-      } else {
-        (0, _index.register)(this.account, this.password).then(function (_ref) {
-          var data = _ref.data;
+      _index3.default.dispatch('getUserInfo').then(function (userInfo) {
+        return (0, _index.addFriendWithUserId)(userInfo.id, _this2.user.id);
+      }).then(function (_ref2) {
+        var data = _ref2.data;
 
-          if (data.state === true) {
-            _this2.gotoLogin();
-          } else {
-            modal.toast({
-              message: data.info
-            });
-          }
-        }, function (error) {
-          console.log(error);
-        });
-      }
-    },
-    gotoLogin: function gotoLogin(e) {
-      navigator.pop();
+        if (data.state) {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          });
+        }
+      }, function (error) {
+        console.log(error);
+      });
     }
   },
   components: {
     WxcButton: _weexUi.WxcButton,
-    WxcCell: _weexUi.WxcCell
+    WxcMinibar: _weexUi.WxcMinibar,
+    WxcSearchbar: _weexUi.WxcSearchbar
   }
 };
 
 /***/ }),
-/* 361 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -41416,96 +41432,67 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "wrapper",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_c('text', {
-    staticClass: "title",
+  }, [_c('wxc-minibar', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "title": "添加朋友",
+      "background-color": "#009ff0",
+      "text-color": "#FFFFFF"
+    },
+    on: {
+      "wxcMinibarLeftButtonClicked": _vm.minibarLeftButtonClick,
+      "wxcMinibarRightButtonClicked": _vm.minibarRightButtonClick
+    }
+  }), _vm._v(" "), _c('wxc-searchbar', {
+    ref: "wxc-searchbar",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "wxcSearchbarCancelClicked": _vm.wxcSearchbarCancelClicked,
+      "wxcSearchbarInputReturned": _vm.wxcSearchbarInputReturned
+    }
+  }), _vm._v(" "), _c('div', [(_vm.user === null) ? _c('text', {
+    staticClass: "no-user",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v("注册")]), _vm._v(" "), _c('wxc-cell', {
+  }, [_vm._v("请输入好友账号进行搜索")]) : _c('div', {
+    staticClass: "user",
     staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('image', {
+    staticStyle: _vm.$processStyle({
+      "width": "50px",
+      "height": "50px"
+    }),
     style: (_vm.$processStyle(undefined)),
     attrs: {
-      "label": "账号",
-      "has-arrow": false,
-      "has-margin": true
+      "src": _vm.user.avatar
     }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.account),
-      expression: "account"
-    }],
+  }), _vm._v(" "), _c('text', {
+    staticStyle: _vm.$processStyle({
+      "flex": "1",
+      "margin-left": "20px"
+    }),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._v(_vm._s(_vm.user.nickname))]), _vm._v(" "), _c('wxc-button', {
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
     attrs: {
-      "slot": "title",
-      "placeholder": "请填写账号"
-    },
-    domProps: {
-      "value": (_vm.account)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.account = $event.target.value
-      }
-    },
-    slot: "title"
-  })]), _vm._v(" "), _c('wxc-cell', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "label": "密码",
-      "has-arrow": false,
-      "has-margin": true
-    }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.password),
-      expression: "password"
-    }],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写密码",
-      "type": "password"
-    },
-    domProps: {
-      "value": (_vm.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.password = $event.target.value
-      }
-    },
-    slot: "title"
-  })]), _vm._v(" "), _c('text', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    on: {
-      "click": _vm.gotoLogin
-    }
-  }, [_vm._v("已有有账号，去登录")]), _vm._v(" "), _c('WxcButton', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
+      "text": "添加好友",
       "type": "blue",
-      "text": "注册"
+      "size": "small"
     },
     on: {
-      "wxcButtonClicked": _vm.register
+      "wxcButtonClicked": _vm.wxcButtonClicked
     }
-  })], 1)
+  })], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5e9222ca", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-6247b40c", module.exports)
   }
 }
 

@@ -79,12 +79,12 @@ export default {
       })
     },
     userClicked (user) {
-      // navigator.push({
-      //   url: getEntryUrl('userCenter'),
-      //   animated: 'true'
-      // }, event => {
-      //   // modal.toast({ message: 'callback: ' + event })
-      // })
+      navigator.push({
+        url: getEntryUrl('album'),
+        animated: 'true'
+      }, event => {
+        // modal.toast({ message: 'callback: ' + event })
+      })
     }
   },
   components: {

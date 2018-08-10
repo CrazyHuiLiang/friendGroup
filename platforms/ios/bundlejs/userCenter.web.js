@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 356);
+/******/ 	return __webpack_require__(__webpack_require__.s = 368);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -39789,318 +39789,7 @@ if (false) {
 }
 
 /***/ }),
-/* 295 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.login = login;
-exports.register = register;
-exports.getFriendsList = getFriendsList;
-exports.searchUserWithAccount = searchUserWithAccount;
-exports.addFriendWithUserId = addFriendWithUserId;
-exports.selectAddMyFriendRequest = selectAddMyFriendRequest;
-exports.updateAddFriendRequest = updateAddFriendRequest;
-exports.removeFriend = removeFriend;
-exports.uploadFile = uploadFile;
-exports.setUserAvatar = setUserAvatar;
-exports.setNickname = setNickname;
-exports.addNew = addNew;
-exports.listFriendsGroup = listFriendsGroup;
-exports.listUserAlbum = listUserAlbum;
-exports.praiseNew = praiseNew;
-exports.addComment = addComment;
-exports.getUserInfo = getUserInfo;
-exports.updateUserInfo = updateUserInfo;
-exports.getMessageList = getMessageList;
-
-var _util = __webpack_require__(24);
-
-var storage = weex.requireModule('storage');
-var stream = weex.requireModule('stream');
-var host = 'http://127.0.0.1:3000';
-
-// 封装发送get请求的方法
-function get(url, processHandler) {
-  return new Promise(function (resolve, reject) {
-    stream.fetch({
-      method: 'GET',
-      url: url,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      type: 'json'
-    }, function (ret) {
-      if (ret.ok) {
-        resolve(ret);
-      } else {
-        reject(ret);
-      }
-    }, processHandler);
-  });
-}
-// 封装发送post请求的方法
-function post(url, body, processHandler) {
-  return new Promise(function (resolve, reject) {
-    stream.fetch({
-      method: 'POST',
-      url: url,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body),
-      type: 'json'
-    }, function (ret) {
-      if (ret.ok) {
-        resolve(ret);
-      } else {
-        reject(ret);
-      }
-    }, processHandler);
-  });
-}
-/*
-  登录
-  account: 账号
-  password： 密码
-  return Promise
- */
-function login(account, password) {
-  return post(host + '/api/login', {
-    account: account,
-    password: password
-  });
-}
-/*
-  注册
-  account: 账号
-  password： 密码
-  return Promise
- */
-function register(account, password) {
-  return post(host + '/api/register', {
-    account: account,
-    password: password
-  });
-}
-/*
-  获取通讯录/我的好友
-  userId: 当前登录用户的userId
- */
-function getFriendsList(userId) {
-  return get(host + ('/api/getFriends?userId=' + userId));
-}
-
-/*
-  根据用户账号查找用户
-  account: 要搜索的用户账号
- */
-function searchUserWithAccount(account) {
-  return get(host + ('/api/searchUserWithAccount?account=' + account));
-}
-
-/*
-  申请添加好友
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  return Promise
- */
-function addFriendWithUserId(userId, friendId) {
-  return post(host + '/api/addFriendWithUserId', {
-    userId: userId,
-    friendId: friendId
-  });
-}
-
-/*
-  查看添加我的好友的申请
-  userId: 当前用户id
- */
-function selectAddMyFriendRequest(userId) {
-  return get(host + ('/api/selectAddMyFriendRequest?userId=' + userId));
-}
-/*
-  处理添加我的好友的申请
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  flag: 0 waiting , 1 agree， 2 disagree
-  return Promise
- */
-function updateAddFriendRequest(userId, friendId, flag) {
-  return post(host + '/api/updateAddFriendRequest', {
-    userId: userId,
-    friendId: friendId,
-    flag: flag
-  });
-}
-
-/*
-  删除好友
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  return Promise
- */
-function removeFriend(userId, friendId) {
-  return post(host + '/api/removeFriend', {
-    userId: userId,
-    friendId: friendId
-  });
-}
-/*
-  上传文件
-  return Promise
- */
-function uploadFile(file) {
-  return post(host + '/api/uploadFile', {
-    file: file
-  });
-}
-
-/*
-  设置用户头像
-  userId: 当前用户id
-  url： 头像url
-  return Promise
- */
-function setUserAvatar(userId, url) {
-  return post(host + '/api/setUserAvatar', {
-    userId: userId,
-    url: url
-  });
-}
-
-/*
-  设置用户昵称
-  userId: 当前用户id
-  nickname：
-  return Promise
- */
-function setNickname(userId, nickname) {
-  return post(host + '/api/setNickname', {
-    userId: userId,
-    nickname: nickname
-  });
-}
-/*
-  发朋友圈
-  userId: 当前用户id
-  nickname：
-  return Promise
- */
-function addNew(userId, content, images) {
-  return post(host + '/api/addNew', {
-    userId: userId,
-    content: content,
-    images: images
-  });
-}
-
-/*
-  获取朋友圈列表
-  userId: 当前用户id
- */
-function listFriendsGroup(userId) {
-  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-
-  return get(host + ('/api/listFriendsGroup?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
-}
-/*
-  获取个人相册列表
-  userId: 当前用户id
- */
-function listUserAlbum(userId) {
-  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-
-  return get(host + ('/api/listUserAlbum?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
-}
-/*
-  点赞/取消点赞
-  userId: 当前用户id
-  newId：被点赞的朋友圈消息的ID
-  return Promise
- */
-function praiseNew(userId, newId) {
-  return post(host + '/api/praiseNew', {
-    userId: userId,
-    newId: newId
-  });
-}
-/*
-  评论
-  userId: 当前用户id
-  newId：被点赞的朋友圈消息的ID
-  parentCommentId: 如果是对朋友圈下面的评论进行回复，需要传入所要回复的评论Id
-  comment: 评论内容
-  return Promise
- */
-function addComment(userId, newsId, parentCommentId, comment) {
-  return post(host + '/api/addComment', {
-    userId: userId,
-    newsId: newsId,
-    parentCommentId: parentCommentId,
-    comment: comment
-  });
-}
-// ------------------------------------分割线----------------------------------------------
-/*
-* 用户信息
-* */
-var UserInfoKey = 'UserInfoKey';
-var defaultUserInfo = {
-  nickName: '点我编辑昵称',
-  avatar: (0, _util.getImagePath)('defaultAvatar', '.png'), // 'http://7xt2se.com1.z0.glb.clouddn.com/zhl-avatar.jpeg',
-  background: (0, _util.getImagePath)('defaultBackground', '.png') // 'https://img.zcool.cn/community/01ee3b5b1124f0a801212d57af516c.jpg@1280w_1l_2o_100sh.jpg'
-
-
-  /*
-  * 获取用户信息
-  * */
-};function getUserInfo(callback) {
-  storage.getItem(UserInfoKey, function (event) {
-    var userInfo = void 0;
-    if (event.data === 'undefined') {
-      userInfo = defaultUserInfo;
-    } else {
-      userInfo = JSON.parse(event.data);
-    }
-    callback(userInfo);
-  });
-}
-
-/*
-* 更改用户信息
-* info: 类似上面defaultUserInfo的结构
-* */
-function updateUserInfo(info, callback) {
-  getUserInfo(function (userInfo) {
-    var newInfo = _extends({}, userInfo, info);
-    storage.setItem(UserInfoKey, JSON.stringify(newInfo), function (r) {
-      callback(newInfo);
-    });
-  });
-}
-
-/*
-* 获取朋友圈列表
-* */
-function getMessageList(callback) {
-  var list = [{
-    content: '太漂亮了',
-    images: ['https://img.zcool.cn/community/01f3445b1a45a5a8012034f7fbe6a7.jpg@1280w_1l_2o_100sh.jpg']
-  }];
-  callback(list);
-}
-
-/***/ }),
+/* 295 */,
 /* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41138,11 +40827,180 @@ exports.default = {
 /* 301 */,
 /* 302 */,
 /* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */,
-/* 307 */,
-/* 308 */,
+/* 304 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(305)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(307),
+  /* template */
+  __webpack_require__(308),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  "data-v-8f23f53a",
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/Tab.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Tab.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8f23f53a", Component.options)
+  } else {
+    hotAPI.reload("data-v-8f23f53a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(306);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(2)("545a2ba4", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8f23f53a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tab.vue", function() {
+     var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-8f23f53a\",\"scoped\":true,\"hasInlineConfig\":false}!../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Tab.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 306 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.home-tab[data-v-8f23f53a] {\n  width: 750px;\n  height: 100px;\n  -ms-flex-align: center;\n      align-items: center;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -ms-flex-direction: row;\n      flex-direction: row;\n  background-color: #f2f3f4;\n  border-top-style: solid;\n  border-top-color: #cccccc;\n  border-top-width: 2px;\n}\n.active-title[data-v-8f23f53a] {\n  color: blue;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  props: {
+    activeIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  created: function created() {},
+
+  methods: {
+    tabClicked: function tabClicked(index) {
+      // this.activeIndex = index
+      this.$emit('tabClicked', index);
+    }
+  },
+  components: {}
+};
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "home-tab",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('div', {
+    staticClass: "tab-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(0)
+      }
+    }
+  }, [_c('text', {
+    staticClass: "title",
+    class: [_vm.activeIndex === 0 ? 'active-title' : ''],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._v("通讯录")])]), _vm._v(" "), _c('div', {
+    staticClass: "tab-item",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(1)
+      }
+    }
+  }, [_c('text', {
+    staticClass: "title",
+    class: [_vm.activeIndex === 1 ? 'active-title' : ''],
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_vm._v("我的")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-8f23f53a", module.exports)
+  }
+}
+
+/***/ }),
 /* 309 */,
 /* 310 */,
 /* 311 */,
@@ -41190,7 +41048,19 @@ exports.default = {
 /* 353 */,
 /* 354 */,
 /* 355 */,
-/* 356 */
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41220,34 +41090,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _weexVueRender2.default.init(_vue2.default);
 
-var App = __webpack_require__(357);
+var App = __webpack_require__(369);
 App.el = '#root';
 new _vue2.default(App);
 
 /***/ }),
-/* 357 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(358)
+  __webpack_require__(370)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(360),
+  __webpack_require__(372),
   /* template */
-  __webpack_require__(361),
+  __webpack_require__(373),
   /* styles */
   injectStyle,
   /* scopeId */
-  "data-v-5e9222ca",
+  "data-v-5f1e5432",
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/register.vue"
+Component.options.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/userCenter.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] register.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] userCenter.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -41256,9 +41126,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5e9222ca", Component.options)
+    hotAPI.createRecord("data-v-5f1e5432", Component.options)
   } else {
-    hotAPI.reload("data-v-5e9222ca", Component.options)
+    hotAPI.reload("data-v-5f1e5432", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -41269,23 +41139,23 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 358 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(359);
+var content = __webpack_require__(371);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("5b97d8f5", content, false, {});
+var update = __webpack_require__(2)("4c73c9b1", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9222ca\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./register.vue", function() {
-     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5e9222ca\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./register.vue");
+   module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f1e5432\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./userCenter.vue", function() {
+     var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5f1e5432\",\"scoped\":true,\"hasInlineConfig\":false}!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./userCenter.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -41295,7 +41165,7 @@ if(false) {
 }
 
 /***/ }),
-/* 359 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -41303,13 +41173,13 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-5e9222ca] {\n}\n.title[data-v-5e9222ca] {\n  font-size: 80px;\n  text-align: center;\n  margin-top: 100px;\n  margin-bottom: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-5f1e5432] {\n}\n.tab[data-v-5f1e5432] {\n  position: fixed;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}\n.user-center-wrap[data-v-5f1e5432] {\n  background-color: #eeeeee;\n}\n.user-info-wrap[data-v-5f1e5432] {\n  -ms-flex-direction: row;\n      flex-direction: row;\n  padding-top: 20px;\n  padding-right: 20px;\n  padding-bottom: 20px;\n  padding-left: 20px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: grey;\n  background-color: #ffffff;\n}\n.avatar[data-v-5f1e5432] {\n  width: 100px;\n  height: 100px;\n  background-color: #eeeeee;\n  margin-right: 20px;\n}\n.name-wrap[data-v-5f1e5432] {\n  -ms-flex-direction: column;\n      flex-direction: column;\n}\n.entry-wrap[data-v-5f1e5432] {\n  margin-top: 40px;\n  margin-bottom: 40px;\n  background-color: #ffffff;\n}\n.entry-row[data-v-5f1e5432] {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  padding-left: 10px;\n  height: 80px;\n  line-height: 80px;\n  border-bottom-style: solid;\n  border-bottom-width: 2px;\n  border-bottom-color: #eeeeee;\n}\n.logout[data-v-5f1e5432] {\n  text-align: center;\n  color: white;\n  background-color: red;\n  padding-top: 10px;\n  padding-right: 10px;\n  padding-bottom: 10px;\n  padding-left: 10px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 360 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -41321,16 +41191,29 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(25);
 
-var _index = __webpack_require__(295);
+var _Tab = __webpack_require__(304);
 
-var _index2 = __webpack_require__(296);
+var _Tab2 = _interopRequireDefault(_Tab);
 
-var _index3 = _interopRequireDefault(_index2);
+var _util = __webpack_require__(24);
+
+var _index = __webpack_require__(296);
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import {getEntryUrl} from './util/util'
-var navigator = weex.requireModule('navigator'); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41349,66 +41232,78 @@ var navigator = weex.requireModule('navigator'); //
 //
 //
 
-var modal = weex.requireModule('modal');
+var navigator = weex.requireModule('navigator');
 exports.default = {
-  name: 'login',
-  store: _index3.default,
+  name: '',
   data: function data() {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      userInfo: null
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.$store.dispatch('getUserInfo').then(function (userInfo) {
-      if (userInfo) {
-        _this.gotoFriendList();
-      }
+    _index2.default.dispatch('getUserInfo').then(function (userInfo) {
+      _this.userInfo = userInfo;
+      console.log(userInfo);
     });
   },
 
   methods: {
-    register: function register(e) {
-      var _this2 = this;
-
-      if (!this.account || this.account.length === 0) {
-        modal.toast({
-          message: '请输入账号'
-        });
-      } else if (!this.password || this.password.length === 0) {
-        modal.toast({
-          message: '请输入密码'
-        });
-      } else {
-        (0, _index.register)(this.account, this.password).then(function (_ref) {
-          var data = _ref.data;
-
-          if (data.state === true) {
-            _this2.gotoLogin();
-          } else {
-            modal.toast({
-              message: data.info
-            });
-          }
-        }, function (error) {
-          console.log(error);
+    // 切换tab
+    tabClicked: function tabClicked(index) {
+      if (index === 0) {
+        navigator.push({
+          url: (0, _util.getEntryUrl)('friendList'),
+          animated: 'true'
+        }, function (event) {
+          // modal.toast({ message: 'callback: ' + event })
         });
       }
     },
-    gotoLogin: function gotoLogin(e) {
-      navigator.pop();
+
+    // 跳转到朋友圈
+    gotoFriendGroup: function gotoFriendGroup() {
+      navigator.push({
+        url: (0, _util.getEntryUrl)('friendGroup'),
+        animated: 'true'
+      }, function (event) {
+        // modal.toast({ message: 'callback: ' + event })
+      });
+    },
+
+    // 跳转到个人相册
+    gotoAlbum: function gotoAlbum() {
+      navigator.push({
+        url: (0, _util.getEntryUrl)('album'),
+        animated: 'true'
+      }, function (event) {
+        // modal.toast({ message: 'callback: ' + event })
+      });
+    },
+    gotoUserSetting: function gotoUserSetting() {
+      navigator.push({
+        url: (0, _util.getEntryUrl)('userSetting'),
+        animated: 'true'
+      }, function (event) {
+        // modal.toast({ message: 'callback: ' + event })
+      });
+    },
+
+    // 退出登录
+    logout: function logout() {
+      console.log('logout');
     }
   },
   components: {
-    WxcButton: _weexUi.WxcButton,
-    WxcCell: _weexUi.WxcCell
+    Tab: _Tab2.default,
+    WxcMinibar: _weexUi.WxcMinibar,
+    WxcButton: _weexUi.WxcButton
   }
 };
 
 /***/ }),
-/* 361 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -41416,88 +41311,76 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "wrapper",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_c('text', {
-    staticClass: "title",
+  }, [_c('wxc-minibar', {
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    attrs: {
+      "title": "个人中心",
+      "background-color": "#111111",
+      "text-color": "#FFFFFF",
+      "left-text": "",
+      "right-text": ""
+    }
+  }), _vm._v(" "), (_vm.userInfo !== null) ? _c('div', {
+    staticClass: "user-center-wrap",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v("注册")]), _vm._v(" "), _c('wxc-cell', {
+  }, [_c('div', {
+    staticClass: "user-info-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('image', {
+    staticClass: "avatar",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
     attrs: {
-      "label": "账号",
-      "has-arrow": false,
-      "has-margin": true
+      "src": _vm.userInfo.avatar
     }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.account),
-      expression: "account"
-    }],
+  }), _vm._v(" "), _c('div', {
+    staticClass: "name-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('text', [_vm._v(_vm._s(_vm.userInfo.nickname))]), _vm._v(" "), _c('text', [_vm._v(_vm._s(_vm.userInfo.account))])])]), _vm._v(" "), _c('div', {
+    staticClass: "entry-wrap",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined))
+  }, [_c('text', {
+    staticClass: "entry-row",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写账号"
-    },
-    domProps: {
-      "value": (_vm.account)
-    },
     on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.account = $event.target.value
-      }
-    },
-    slot: "title"
-  })]), _vm._v(" "), _c('wxc-cell', {
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "label": "密码",
-      "has-arrow": false,
-      "has-margin": true
+      "click": _vm.gotoFriendGroup
     }
-  }, [_c('input', {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: (_vm.password),
-      expression: "password"
-    }],
-    staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined)),
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写密码",
-      "type": "password"
-    },
-    domProps: {
-      "value": (_vm.password)
-    },
-    on: {
-      "input": function($event) {
-        if ($event.target.composing) { return; }
-        _vm.password = $event.target.value
-      }
-    },
-    slot: "title"
-  })]), _vm._v(" "), _c('text', {
+  }, [_vm._v("朋友圈")]), _vm._v(" "), _c('text', {
+    staticClass: "entry-row",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
     on: {
-      "click": _vm.gotoLogin
+      "click": _vm.gotoAlbum
     }
-  }, [_vm._v("已有有账号，去登录")]), _vm._v(" "), _c('WxcButton', {
+  }, [_vm._v("相册")]), _vm._v(" "), _c('text', {
+    staticClass: "entry-row",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.gotoUserSetting
+    }
+  }, [_vm._v("个人设置")])]), _vm._v(" "), _c('text', {
+    staticClass: "logout",
+    staticStyle: _vm.$processStyle(undefined),
+    style: (_vm.$processStyle(undefined)),
+    on: {
+      "click": _vm.logout
+    }
+  }, [_vm._v("退出登录")])]) : _vm._e(), _vm._v(" "), _c('tab', {
+    staticClass: "tab",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
     attrs: {
-      "type": "blue",
-      "text": "注册"
+      "activeIndex": 1
     },
     on: {
-      "wxcButtonClicked": _vm.register
+      "tabClicked": _vm.tabClicked
     }
   })], 1)
 },staticRenderFns: []}
@@ -41505,7 +41388,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-5e9222ca", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5f1e5432", module.exports)
   }
 }
 

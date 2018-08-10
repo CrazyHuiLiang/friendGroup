@@ -62,26 +62,65 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 247);
+/******/ 	return __webpack_require__(__webpack_require__.s = 256);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 15:
+/***/ 14:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getImagePath = getImagePath;
+exports.getEntryUrl = getEntryUrl;
+
+// 获取本地静态资源（图片）路径
+function getImagePath(name) {
+  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
+
+  // debugger
+  if (WXEnvironment.platform === 'Web') {
+    return abs + 'assets/img/' + name + type;
+  } else if (WXEnvironment.platform === 'android') {
+    return 'local:///' + name;
+  } else {
+    return 'local:///bundlejs/assets/img/' + name + type;
+  }
+}
+function getEntryUrl(name) {
+  if (weex.config.env.platform === 'Web') {
+    return './' + name + '.html';
+  } else {
+    var arr = weex.config.bundleUrl.split('/');
+    arr.pop();
+    arr.push(name + '.js');
+    return arr.join('/');
+  }
+}
+
+/***/ }),
+
+/***/ 248:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(16)
+__vue_styles__.push(__webpack_require__(249)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(17)
+__vue_exports__ = __webpack_require__(250)
 
 /* template */
-var __vue_template__ = __webpack_require__(18)
+var __vue_template__ = __webpack_require__(251)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -112,7 +151,7 @@ module.exports = __vue_exports__
 
 /***/ }),
 
-/***/ 16:
+/***/ 249:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -172,7 +211,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 17:
+/***/ 250:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -182,7 +221,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(4);
+var _util = __webpack_require__(14);
 
 exports.default = {
   name: 'Message',
@@ -237,7 +276,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 18:
+/***/ 251:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -281,21 +320,21 @@ module.exports.render._withStripped = true
 
 /***/ }),
 
-/***/ 247:
+/***/ 256:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(248)
+__vue_styles__.push(__webpack_require__(257)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(249)
+__vue_exports__ = __webpack_require__(258)
 
 /* template */
-var __vue_template__ = __webpack_require__(250)
+var __vue_template__ = __webpack_require__(259)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -328,7 +367,7 @@ new Vue(module.exports)
 
 /***/ }),
 
-/***/ 248:
+/***/ 257:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -404,7 +443,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 249:
+/***/ 258:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -414,9 +453,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _util = __webpack_require__(4);
+var _util = __webpack_require__(14);
 
-var _Message = __webpack_require__(15);
+var _Message = __webpack_require__(248);
 
 var _Message2 = _interopRequireDefault(_Message);
 
@@ -493,7 +532,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 250:
+/***/ 259:
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -527,45 +566,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")]), _c('text', [_vm._v("添加朋友圈")])])
 }]}
 module.exports.render._withStripped = true
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getImagePath = getImagePath;
-exports.getEntryUrl = getEntryUrl;
-
-// 获取本地静态资源（图片）路径
-function getImagePath(name) {
-  var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var abs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '../../';
-
-  // debugger
-  if (WXEnvironment.platform === 'Web') {
-    return abs + 'assets/img/' + name + type;
-  } else if (WXEnvironment.platform === 'android') {
-    return 'local:///' + name;
-  } else {
-    return 'local:///bundlejs/assets/img/' + name + type;
-  }
-}
-function getEntryUrl(name) {
-  if (weex.config.env.platform === 'Web') {
-    return './' + name + '.html';
-  } else {
-    var arr = weex.config.bundleUrl.split('/');
-    arr.pop();
-    arr.push(name + '.js');
-    return arr.join('/');
-  }
-}
 
 /***/ })
 

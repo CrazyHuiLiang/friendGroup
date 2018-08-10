@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 276);
+/******/ 	return __webpack_require__(__webpack_require__.s = 296);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -18286,318 +18286,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 243 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-exports.login = login;
-exports.register = register;
-exports.getFriendsList = getFriendsList;
-exports.searchUserWithAccount = searchUserWithAccount;
-exports.addFriendWithUserId = addFriendWithUserId;
-exports.selectAddMyFriendRequest = selectAddMyFriendRequest;
-exports.updateAddFriendRequest = updateAddFriendRequest;
-exports.removeFriend = removeFriend;
-exports.uploadFile = uploadFile;
-exports.setUserAvatar = setUserAvatar;
-exports.setNickname = setNickname;
-exports.addNew = addNew;
-exports.listFriendsGroup = listFriendsGroup;
-exports.listUserAlbum = listUserAlbum;
-exports.praiseNew = praiseNew;
-exports.addComment = addComment;
-exports.getUserInfo = getUserInfo;
-exports.updateUserInfo = updateUserInfo;
-exports.getMessageList = getMessageList;
-
-var _util = __webpack_require__(14);
-
-var storage = weex.requireModule('storage');
-var stream = weex.requireModule('stream');
-var host = 'http://127.0.0.1:3000';
-
-// 封装发送get请求的方法
-function get(url, processHandler) {
-  return new Promise(function (resolve, reject) {
-    stream.fetch({
-      method: 'GET',
-      url: url,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      type: 'json'
-    }, function (ret) {
-      if (ret.ok) {
-        resolve(ret);
-      } else {
-        reject(ret);
-      }
-    }, processHandler);
-  });
-}
-// 封装发送post请求的方法
-function post(url, body, processHandler) {
-  return new Promise(function (resolve, reject) {
-    stream.fetch({
-      method: 'POST',
-      url: url,
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body),
-      type: 'json'
-    }, function (ret) {
-      if (ret.ok) {
-        resolve(ret);
-      } else {
-        reject(ret);
-      }
-    }, processHandler);
-  });
-}
-/*
-  登录
-  account: 账号
-  password： 密码
-  return Promise
- */
-function login(account, password) {
-  return post(host + '/api/login', {
-    account: account,
-    password: password
-  });
-}
-/*
-  注册
-  account: 账号
-  password： 密码
-  return Promise
- */
-function register(account, password) {
-  return post(host + '/api/register', {
-    account: account,
-    password: password
-  });
-}
-/*
-  获取通讯录/我的好友
-  userId: 当前登录用户的userId
- */
-function getFriendsList(userId) {
-  return get(host + ('/api/getFriends?userId=' + userId));
-}
-
-/*
-  根据用户账号查找用户
-  account: 要搜索的用户账号
- */
-function searchUserWithAccount(account) {
-  return get(host + ('/api/searchUserWithAccount?account=' + account));
-}
-
-/*
-  申请添加好友
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  return Promise
- */
-function addFriendWithUserId(userId, friendId) {
-  return post(host + '/api/addFriendWithUserId', {
-    userId: userId,
-    friendId: friendId
-  });
-}
-
-/*
-  查看添加我的好友的申请
-  userId: 当前用户id
- */
-function selectAddMyFriendRequest(userId) {
-  return get(host + ('/api/selectAddMyFriendRequest?userId=' + userId));
-}
-/*
-  处理添加我的好友的申请
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  flag: 0 waiting , 1 agree， 2 disagree
-  return Promise
- */
-function updateAddFriendRequest(userId, friendId, flag) {
-  return post(host + '/api/updateAddFriendRequest', {
-    userId: userId,
-    friendId: friendId,
-    flag: flag
-  });
-}
-
-/*
-  删除好友
-  userId: 当前用户id
-  friendId： 要添加的用户id
-  return Promise
- */
-function removeFriend(userId, friendId) {
-  return post(host + '/api/removeFriend', {
-    userId: userId,
-    friendId: friendId
-  });
-}
-/*
-  上传文件
-  return Promise
- */
-function uploadFile(file) {
-  return post(host + '/api/uploadFile', {
-    file: file
-  });
-}
-
-/*
-  设置用户头像
-  userId: 当前用户id
-  url： 头像url
-  return Promise
- */
-function setUserAvatar(userId, url) {
-  return post(host + '/api/setUserAvatar', {
-    userId: userId,
-    url: url
-  });
-}
-
-/*
-  设置用户昵称
-  userId: 当前用户id
-  nickname：
-  return Promise
- */
-function setNickname(userId, nickname) {
-  return post(host + '/api/setNickname', {
-    userId: userId,
-    nickname: nickname
-  });
-}
-/*
-  发朋友圈
-  userId: 当前用户id
-  nickname：
-  return Promise
- */
-function addNew(userId, content, images) {
-  return post(host + '/api/addNew', {
-    userId: userId,
-    content: content,
-    images: images
-  });
-}
-
-/*
-  获取朋友圈列表
-  userId: 当前用户id
- */
-function listFriendsGroup(userId) {
-  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-
-  return get(host + ('/api/listFriendsGroup?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
-}
-/*
-  获取个人相册列表
-  userId: 当前用户id
- */
-function listUserAlbum(userId) {
-  var pageIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-  var pageSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-
-  return get(host + ('/api/listUserAlbum?userId=' + userId + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize));
-}
-/*
-  点赞/取消点赞
-  userId: 当前用户id
-  newId：被点赞的朋友圈消息的ID
-  return Promise
- */
-function praiseNew(userId, newId) {
-  return post(host + '/api/praiseNew', {
-    userId: userId,
-    newId: newId
-  });
-}
-/*
-  评论
-  userId: 当前用户id
-  newId：被点赞的朋友圈消息的ID
-  parentCommentId: 如果是对朋友圈下面的评论进行回复，需要传入所要回复的评论Id
-  comment: 评论内容
-  return Promise
- */
-function addComment(userId, newsId, parentCommentId, comment) {
-  return post(host + '/api/addComment', {
-    userId: userId,
-    newsId: newsId,
-    parentCommentId: parentCommentId,
-    comment: comment
-  });
-}
-// ------------------------------------分割线----------------------------------------------
-/*
-* 用户信息
-* */
-var UserInfoKey = 'UserInfoKey';
-var defaultUserInfo = {
-  nickName: '点我编辑昵称',
-  avatar: (0, _util.getImagePath)('defaultAvatar', '.png'), // 'http://7xt2se.com1.z0.glb.clouddn.com/zhl-avatar.jpeg',
-  background: (0, _util.getImagePath)('defaultBackground', '.png') // 'https://img.zcool.cn/community/01ee3b5b1124f0a801212d57af516c.jpg@1280w_1l_2o_100sh.jpg'
-
-
-  /*
-  * 获取用户信息
-  * */
-};function getUserInfo(callback) {
-  storage.getItem(UserInfoKey, function (event) {
-    var userInfo = void 0;
-    if (event.data === 'undefined') {
-      userInfo = defaultUserInfo;
-    } else {
-      userInfo = JSON.parse(event.data);
-    }
-    callback(userInfo);
-  });
-}
-
-/*
-* 更改用户信息
-* info: 类似上面defaultUserInfo的结构
-* */
-function updateUserInfo(info, callback) {
-  getUserInfo(function (userInfo) {
-    var newInfo = _extends({}, userInfo, info);
-    storage.setItem(UserInfoKey, JSON.stringify(newInfo), function (r) {
-      callback(newInfo);
-    });
-  });
-}
-
-/*
-* 获取朋友圈列表
-* */
-function getMessageList(callback) {
-  var list = [{
-    content: '太漂亮了',
-    images: ['https://img.zcool.cn/community/01f3445b1a45a5a8012034f7fbe6a7.jpg@1280w_1l_2o_100sh.jpg']
-  }];
-  callback(list);
-}
-
-/***/ }),
+/* 243 */,
 /* 244 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -26944,10 +26633,145 @@ exports.default = {
 /* 249 */,
 /* 250 */,
 /* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = []
+
+/* styles */
+__vue_styles__.push(__webpack_require__(253)
+)
+
+/* script */
+__vue_exports__ = __webpack_require__(254)
+
+/* template */
+var __vue_template__ = __webpack_require__(255)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/components/Tab.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+__vue_options__._scopeId = "data-v-5d8cbf70"
+__vue_options__.style = __vue_options__.style || {}
+__vue_styles__.forEach(function (module) {
+  for (var name in module) {
+    __vue_options__.style[name] = module[name]
+  }
+})
+if (typeof __register_static_styles__ === "function") {
+  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
+}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "home-tab": {
+    "width": "750",
+    "height": "100",
+    "alignItems": "center",
+    "justifyContent": "space-around",
+    "flexDirection": "row",
+    "backgroundColor": "#f2f3f4",
+    "borderTopStyle": "solid",
+    "borderTopColor": "#cccccc",
+    "borderTopWidth": "2"
+  },
+  "active-title": {
+    "color": "#0000FF"
+  }
+}
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  props: {
+    activeIndex: {
+      type: Number,
+      default: 0
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  created: function created() {},
+
+  methods: {
+    tabClicked: function tabClicked(index) {
+      // this.activeIndex = index
+      this.$emit('tabClicked', index);
+    }
+  },
+  components: {}
+};
+
+/***/ }),
+/* 255 */
+/***/ (function(module, exports) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: ["home-tab"]
+  }, [_c('div', {
+    staticClass: ["tab-item"],
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(0)
+      }
+    }
+  }, [_c('text', {
+    staticClass: ["title"],
+    class: [_vm.activeIndex === 0 ? 'active-title' : '']
+  }, [_vm._v("通讯录")])]), _c('div', {
+    staticClass: ["tab-item"],
+    on: {
+      "click": function($event) {
+        _vm.tabClicked(1)
+      }
+    }
+  }, [_c('text', {
+    staticClass: ["title"],
+    class: [_vm.activeIndex === 1 ? 'active-title' : '']
+  }, [_vm._v("我的")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+
+/***/ }),
 /* 256 */,
 /* 257 */,
 /* 258 */,
@@ -26968,21 +26792,41 @@ exports.default = {
 /* 273 */,
 /* 274 */,
 /* 275 */,
-/* 276 */
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(277)
+__vue_styles__.push(__webpack_require__(297)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(278)
+__vue_exports__ = __webpack_require__(298)
 
 /* template */
-var __vue_template__ = __webpack_require__(279)
+var __vue_template__ = __webpack_require__(299)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -26994,10 +26838,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/login.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/userCenter.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-41c54025"
+__vue_options__._scopeId = "data-v-7a1ec318"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -27014,20 +26858,67 @@ new Vue(module.exports)
 
 
 /***/ }),
-/* 277 */
+/* 297 */
 /***/ (function(module, exports) {
 
 module.exports = {
-  "title": {
-    "fontSize": "80",
+  "tab": {
+    "position": "fixed",
+    "right": 0,
+    "bottom": 0,
+    "left": 0
+  },
+  "user-center-wrap": {
+    "backgroundColor": "#eeeeee"
+  },
+  "user-info-wrap": {
+    "flexDirection": "row",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "borderBottomStyle": "solid",
+    "borderBottomWidth": "2",
+    "borderBottomColor": "#808080",
+    "backgroundColor": "#ffffff"
+  },
+  "avatar": {
+    "width": "100",
+    "height": "100",
+    "backgroundColor": "#eeeeee",
+    "marginRight": "20"
+  },
+  "name-wrap": {
+    "flexDirection": "column"
+  },
+  "entry-wrap": {
+    "marginTop": "40",
+    "marginBottom": "40",
+    "backgroundColor": "#ffffff"
+  },
+  "entry-row": {
+    "paddingTop": "10",
+    "paddingBottom": "10",
+    "paddingLeft": "10",
+    "height": "80",
+    "lineHeight": "80",
+    "borderBottomStyle": "solid",
+    "borderBottomWidth": "2",
+    "borderBottomColor": "#eeeeee"
+  },
+  "logout": {
     "textAlign": "center",
-    "marginTop": "100",
-    "marginBottom": "100"
+    "color": "#FFFFFF",
+    "backgroundColor": "#FF0000",
+    "paddingTop": "10",
+    "paddingRight": "10",
+    "paddingBottom": "10",
+    "paddingLeft": "10"
   }
 }
 
 /***/ }),
-/* 278 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27039,13 +26930,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(15);
 
-var _index = __webpack_require__(243);
+var _Tab = __webpack_require__(252);
 
-var _index2 = __webpack_require__(244);
-
-var _index3 = _interopRequireDefault(_index2);
+var _Tab2 = _interopRequireDefault(_Tab);
 
 var _util = __webpack_require__(14);
+
+var _index = __webpack_require__(244);
+
+var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27067,137 +26960,142 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var navigator = weex.requireModule('navigator');
-var modal = weex.requireModule('modal');
 exports.default = {
-  name: 'login',
+  name: '',
   data: function data() {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      userInfo: null
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    _index3.default.dispatch('getUserInfo').then(function (userInfo) {
-      if (userInfo) {
-        _this.gotoFriendList();
-      }
+    _index2.default.dispatch('getUserInfo').then(function (userInfo) {
+      _this.userInfo = userInfo;
+      console.log(userInfo);
     });
   },
 
   methods: {
-    login: function login(e) {
-      var _this2 = this;
-
-      if (!this.account || this.account.length === 0) {
-        modal.toast({
-          message: '请输入账号'
-        });
-      } else if (!this.password || this.password.length === 0) {
-        modal.toast({
-          message: '请输入密码'
-        });
-      } else {
-        (0, _index.login)(this.account, this.password).then(function (_ref) {
-          var data = _ref.data;
-
-          if (data.state === true) {
-            console.log('login', data);
-            _index3.default.commit('setUserInfo', data.info);
-            _this2.gotoFriendList();
-          } else {
-            modal.toast({
-              message: data.info
-            });
-          }
-        }, function (error) {
-          console.log(error);
+    // 切换tab
+    tabClicked: function tabClicked(index) {
+      if (index === 0) {
+        navigator.push({
+          url: (0, _util.getEntryUrl)('friendList'),
+          animated: 'true'
+        }, function (event) {
+          // modal.toast({ message: 'callback: ' + event })
         });
       }
     },
-    gotoRegister: function gotoRegister(e) {
+
+    // 跳转到朋友圈
+    gotoFriendGroup: function gotoFriendGroup() {
       navigator.push({
-        url: (0, _util.getEntryUrl)('register'),
+        url: (0, _util.getEntryUrl)('friendGroup'),
         animated: 'true'
       }, function (event) {
         // modal.toast({ message: 'callback: ' + event })
       });
     },
-    gotoFriendList: function gotoFriendList(e) {
+
+    // 跳转到个人相册
+    gotoAlbum: function gotoAlbum() {
       navigator.push({
-        url: (0, _util.getEntryUrl)('friendList'),
+        url: (0, _util.getEntryUrl)('album'),
         animated: 'true'
       }, function (event) {
         // modal.toast({ message: 'callback: ' + event })
       });
+    },
+    gotoUserSetting: function gotoUserSetting() {
+      navigator.push({
+        url: (0, _util.getEntryUrl)('userSetting'),
+        animated: 'true'
+      }, function (event) {
+        // modal.toast({ message: 'callback: ' + event })
+      });
+    },
+
+    // 退出登录
+    logout: function logout() {
+      console.log('logout');
     }
   },
   components: {
-    WxcButton: _weexUi.WxcButton,
-    WxcCell: _weexUi.WxcCell
+    Tab: _Tab2.default,
+    WxcMinibar: _weexUi.WxcMinibar,
+    WxcButton: _weexUi.WxcButton
   }
 };
 
 /***/ }),
-/* 279 */
+/* 299 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
+  }, [_c('wxc-minibar', {
+    attrs: {
+      "title": "个人中心",
+      "backgroundColor": "#111111",
+      "textColor": "#FFFFFF",
+      "leftText": "",
+      "rightText": ""
+    }
+  }), (_vm.userInfo !== null) ? _c('div', {
+    staticClass: ["user-center-wrap"]
+  }, [_c('div', {
+    staticClass: ["user-info-wrap"]
+  }, [_c('image', {
+    staticClass: ["avatar"],
+    attrs: {
+      "src": _vm.userInfo.avatar
+    }
+  }), _c('div', {
+    staticClass: ["name-wrap"]
+  }, [_c('text', [_vm._v(_vm._s(_vm.userInfo.nickname))]), _c('text', [_vm._v(_vm._s(_vm.userInfo.account))])])]), _c('div', {
+    staticClass: ["entry-wrap"]
   }, [_c('text', {
-    staticClass: ["title"]
-  }, [_vm._v("登录")]), _c('wxc-cell', {
-    attrs: {
-      "label": "账号",
-      "hasArrow": false,
-      "hasMargin": true
+    staticClass: ["entry-row"],
+    on: {
+      "click": _vm.gotoFriendGroup
     }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写账号",
-      "value": (_vm.account)
-    },
+  }, [_vm._v("朋友圈")]), _c('text', {
+    staticClass: ["entry-row"],
     on: {
-      "input": function($event) {
-        _vm.account = $event.target.attr.value
-      }
-    },
-    slot: "title"
-  })]), _c('wxc-cell', {
-    attrs: {
-      "label": "密码",
-      "hasArrow": false,
-      "hasMargin": true
+      "click": _vm.gotoAlbum
     }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写密码",
-      "type": "password",
-      "value": (_vm.password)
-    },
+  }, [_vm._v("相册")]), _c('text', {
+    staticClass: ["entry-row"],
     on: {
-      "input": function($event) {
-        _vm.password = $event.target.attr.value
-      }
-    },
-    slot: "title"
-  })]), _c('text', {
-    on: {
-      "click": _vm.gotoRegister
+      "click": _vm.gotoUserSetting
     }
-  }, [_vm._v("还没有账号")]), _c('WxcButton', {
+  }, [_vm._v("个人设置")])]), _c('text', {
+    staticClass: ["logout"],
+    on: {
+      "click": _vm.logout
+    }
+  }, [_vm._v("退出登录")])]) : _vm._e(), _c('tab', {
+    staticClass: ["tab"],
     attrs: {
-      "type": "blue",
-      "text": "登录"
+      "activeIndex": 1
     },
     on: {
-      "wxcButtonClicked": _vm.login
+      "tabClicked": _vm.tabClicked
     }
   })], 1)
 },staticRenderFns: []}

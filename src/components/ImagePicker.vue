@@ -35,7 +35,10 @@ export default {
           reader.readAsDataURL(file)
           reader.onload = () => {
             imagePicker.removeChild(input)
-            callback(reader.result)
+            callback({
+              name: file.name,
+              url: reader.result
+            })
           }
         }
       }

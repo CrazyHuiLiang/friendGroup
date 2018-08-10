@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-
+    <text>个人相册</text>
   </div>
 </template>
 

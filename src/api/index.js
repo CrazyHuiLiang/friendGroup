@@ -2,7 +2,7 @@ import { getImagePath } from '../util/util'
 const storage = weex.requireModule('storage')
 const stream = weex.requireModule('stream')
 const host = ''
-
+// host = 'http://127.0.0.1:3000'
 // 封装发送get请求的方法
 function get (url, processHandler) {
   return new Promise((resolve, reject) => {
@@ -133,8 +133,9 @@ export function removeFriend (userId, friendId) {
   上传文件
   return Promise
  */
-export function uploadFile (file) {
-  return post(host + '/api/uploadFile', {
+export function uploadFile (filename, file) {
+  return post(host + '/api/uploadFileBase64', {
+    filename,
     file
   })
 }

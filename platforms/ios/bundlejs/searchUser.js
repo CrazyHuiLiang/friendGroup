@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 276);
+/******/ 	return __webpack_require__(__webpack_require__.s = 292);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26968,21 +26968,37 @@ exports.default = {
 /* 273 */,
 /* 274 */,
 /* 275 */,
-/* 276 */
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(277)
+__vue_styles__.push(__webpack_require__(293)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(278)
+__vue_exports__ = __webpack_require__(294)
 
 /* template */
-var __vue_template__ = __webpack_require__(279)
+var __vue_template__ = __webpack_require__(295)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -26994,10 +27010,10 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/login.vue"
+__vue_options__.__file = "/Users/Zhang/Documents/MyGit/friendGroup/src/searchUser.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-41c54025"
+__vue_options__._scopeId = "data-v-7d4822f2"
 __vue_options__.style = __vue_options__.style || {}
 __vue_styles__.forEach(function (module) {
   for (var name in module) {
@@ -27014,20 +27030,26 @@ new Vue(module.exports)
 
 
 /***/ }),
-/* 277 */
+/* 293 */
 /***/ (function(module, exports) {
 
 module.exports = {
-  "title": {
-    "fontSize": "80",
+  "no-user": {
     "textAlign": "center",
-    "marginTop": "100",
-    "marginBottom": "100"
+    "marginTop": "100"
+  },
+  "user": {
+    "paddingTop": "30",
+    "paddingRight": "30",
+    "paddingBottom": "30",
+    "paddingLeft": "30",
+    "flexDirection": "row",
+    "justifyContent": "space-between"
   }
 }
 
 /***/ }),
-/* 278 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27045,10 +27067,14 @@ var _index2 = __webpack_require__(244);
 
 var _index3 = _interopRequireDefault(_index2);
 
-var _util = __webpack_require__(14);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var modal = weex.requireModule('modal');
+// const navigator = weex.requireModule('navigator')
+
+//
+//
+//
 //
 //
 //
@@ -27068,138 +27094,119 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var navigator = weex.requireModule('navigator');
-var modal = weex.requireModule('modal');
 exports.default = {
-  name: 'login',
+  name: '',
+  props: {},
   data: function data() {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      searchKey: '',
+      user: null
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    _index3.default.dispatch('getUserInfo').then(function (userInfo) {
-      if (userInfo) {
-        _this.gotoFriendList();
-      }
-    });
-  },
+  mounted: function mounted() {},
 
   methods: {
-    login: function login(e) {
-      var _this2 = this;
-
-      if (!this.account || this.account.length === 0) {
-        modal.toast({
-          message: '请输入账号'
-        });
-      } else if (!this.password || this.password.length === 0) {
-        modal.toast({
-          message: '请输入密码'
-        });
-      } else {
-        (0, _index.login)(this.account, this.password).then(function (_ref) {
-          var data = _ref.data;
-
-          if (data.state === true) {
-            console.log('login', data);
-            _index3.default.commit('setUserInfo', data.info);
-            _this2.gotoFriendList();
-          } else {
-            modal.toast({
-              message: data.info
-            });
-          }
-        }, function (error) {
-          console.log(error);
-        });
-      }
+    minibarLeftButtonClick: function minibarLeftButtonClick() {
+      // navigator.pop()
     },
-    gotoRegister: function gotoRegister(e) {
-      navigator.push({
-        url: (0, _util.getEntryUrl)('register'),
-        animated: 'true'
-      }, function (event) {
-        // modal.toast({ message: 'callback: ' + event })
+    minibarRightButtonClick: function minibarRightButtonClick() {
+      modal.toast({ 'message': 'click rightButton!', 'duration': 1 });
+    },
+    wxcSearchbarCancelClicked: function wxcSearchbarCancelClicked() {},
+    wxcSearchbarInputReturned: function wxcSearchbarInputReturned(e) {
+      var _this = this;
+
+      (0, _index.searchUserWithAccount)(e.value).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.state) {
+          _this.user = data.info[0];
+        } else {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          });
+        }
+      }, function (error) {
+        console.log(error);
       });
     },
-    gotoFriendList: function gotoFriendList(e) {
-      navigator.push({
-        url: (0, _util.getEntryUrl)('friendList'),
-        animated: 'true'
-      }, function (event) {
-        // modal.toast({ message: 'callback: ' + event })
+    wxcButtonClicked: function wxcButtonClicked(e) {
+      var _this2 = this;
+
+      _index3.default.dispatch('getUserInfo').then(function (userInfo) {
+        return (0, _index.addFriendWithUserId)(userInfo.id, _this2.user.id);
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.state) {
+          modal.toast({
+            'message': data.info,
+            'duration': 1
+          });
+        }
+      }, function (error) {
+        console.log(error);
       });
     }
   },
   components: {
     WxcButton: _weexUi.WxcButton,
-    WxcCell: _weexUi.WxcCell
+    WxcMinibar: _weexUi.WxcMinibar,
+    WxcSearchbar: _weexUi.WxcSearchbar
   }
 };
 
 /***/ }),
-/* 279 */
+/* 295 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"]
-  }, [_c('text', {
-    staticClass: ["title"]
-  }, [_vm._v("登录")]), _c('wxc-cell', {
+  }, [_c('wxc-minibar', {
     attrs: {
-      "label": "账号",
-      "hasArrow": false,
-      "hasMargin": true
-    }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写账号",
-      "value": (_vm.account)
+      "title": "添加朋友",
+      "backgroundColor": "#009ff0",
+      "textColor": "#FFFFFF"
     },
     on: {
-      "input": function($event) {
-        _vm.account = $event.target.attr.value
-      }
-    },
-    slot: "title"
-  })]), _c('wxc-cell', {
-    attrs: {
-      "label": "密码",
-      "hasArrow": false,
-      "hasMargin": true
+      "wxcMinibarLeftButtonClicked": _vm.minibarLeftButtonClick,
+      "wxcMinibarRightButtonClicked": _vm.minibarRightButtonClick
     }
-  }, [_c('input', {
-    attrs: {
-      "slot": "title",
-      "placeholder": "请填写密码",
-      "type": "password",
-      "value": (_vm.password)
-    },
+  }), _c('wxc-searchbar', {
+    ref: "wxc-searchbar",
     on: {
-      "input": function($event) {
-        _vm.password = $event.target.attr.value
-      }
-    },
-    slot: "title"
-  })]), _c('text', {
-    on: {
-      "click": _vm.gotoRegister
+      "wxcSearchbarCancelClicked": _vm.wxcSearchbarCancelClicked,
+      "wxcSearchbarInputReturned": _vm.wxcSearchbarInputReturned
     }
-  }, [_vm._v("还没有账号")]), _c('WxcButton', {
+  }), _c('div', [(_vm.user === null) ? _c('text', {
+    staticClass: ["no-user"]
+  }, [_vm._v("请输入好友账号进行搜索")]) : _c('div', {
+    staticClass: ["user"]
+  }, [_c('image', {
+    staticStyle: {
+      width: "50px",
+      height: "50px"
+    },
     attrs: {
+      "src": _vm.user.avatar
+    }
+  }), _c('text', {
+    staticStyle: {
+      flex: "1",
+      marginLeft: "20px"
+    }
+  }, [_vm._v(_vm._s(_vm.user.nickname))]), _c('wxc-button', {
+    attrs: {
+      "text": "添加好友",
       "type": "blue",
-      "text": "登录"
+      "size": "small"
     },
     on: {
-      "wxcButtonClicked": _vm.login
+      "wxcButtonClicked": _vm.wxcButtonClicked
     }
-  })], 1)
+  })], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 
