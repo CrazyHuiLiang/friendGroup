@@ -1,147 +1,125 @@
 <template>
   <div class="wrapper">
-    <div class="header">
-      <div class="back-container" @click="goBack">
-        <!--<image class="back-icon" :src="ui.back"></image>-->
-        <text class="back-title">取消</text>
-      </div>
-      <text class="title">发朋友圈</text>
-      <div class="add-message-container" @click="gotoAddMessage">
-        <image class="add-message" :src="ui.addMassage"></image>
+    <wxc-minibar left-text="取消" title="发朋友圈" right-text="确定" background-color="#009ff0" text-color="#FFFFFF" @wxcMinibarRightButtonClicked="addMessage"></wxc-minibar>
+    <textarea class="textarea" :rows="3" v-model="content"></textarea>
+    <div class="image-wrap">
+      <image class="image" v-for="(image, index) in images" :key='index' :src="image" @click="removeImage(index)"></image>
+      <div v-if="images.length < 9" class="image add-image" @click="addImage">
+        <text style="text-align: center; width: 100%;font-size: 120px;color: #666666;">+</text>
       </div>
     </div>
-    <scroller class="page-content">
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-      <text>添加朋友圈</text>
-    </scroller>
+    <wxc-loading :show="showLoading" type="default" :needMask="true" loading-text="发布中"></wxc-loading>
+    <image-picker ref="imagePicker"></image-picker>
   </div>
 </template>
 
 <script>
-import {getImagePath} from './util/util'
-import Message from './components/Message.vue'
+import ImagePicker from './components/ImagePicker'
+import store from './store/index'
+import {
+  WxcButton,
+  WxcMinibar,
+  WxcCell,
+  WxcLoading
+} from 'weex-ui'
+import {
+  uploadFile,
+  addNew
+} from './api/index'
 let navigator = weex.requireModule('navigator')
 export default {
   name: 'Add',
   data () {
     return {
-      ui: {
-        back: getImagePath('back', '.png'),
-        addMassage: getImagePath('addMessage', '.png')
-      },
-      userInfo: {
-        nickname: '点我更改昵称',
-        avatar: getImagePath('defaultAvatar', '.png'),
-        background: getImagePath('defaultBackground', '.png')
-      },
-      list: []
+      content: '',
+      images: [],
+      showLoading: false
     }
   },
   mounted () {
-    this.list = ['', '']
   },
   methods: {
-    goBack () {
-      navigator.pop({
-        animated: 'true'
+    // 添加图片
+    addImage () {
+      let imagePicker = this.$refs.imagePicker
+      imagePicker.pick(image => {
+        uploadFile(image.name, image.url).then(({data}) => {
+          this.images.push(data.info)
+        }, error => {
+          console.error(error)
+        })
       })
     },
-    gotoAddMessage () {
-      navigator.push({
-        url: 'http://dotwe.org/raw/dist/519962541fcf6acd911986357ad9c2ed.js',
-        animated: 'true'
-      }, event => {
-        // modal.toast({ message: 'callback: ' + event })
+    removeImage (index) {
+      this.images.splice(index, 1)
+    },
+    addMessage () {
+      this.showLoading = true
+      store.dispatch('getUserInfo').then(userInfo => {
+        addNew(userInfo.id, this.content, this.images).then(({data}) => {
+          this.showLoading = false
+          if (data.state) {
+            navigator.pop({
+              animated: 'true'
+            })
+          } else {
+            console.log(data.info)
+          }
+        }, error => {
+          this.showLoading = false
+          console.error(error)
+        })
       })
     }
   },
   components: {
-    Message
+    WxcButton,
+    WxcMinibar,
+    WxcCell,
+    WxcLoading,
+    ImagePicker
   }
 }
 </script>
 
 <style scoped>
   .wrapper {
-    /*justify-content: center;*/
-    /*align-items: center;*/
   }
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 750px;
-    height: 100px;
-    background-color: #373a3f;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+
+  .textarea {
+    font-size: 30px;
+    width: 650px;
+    margin-top: 50px;
+    margin-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    color: #666666;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #dddddd;
   }
-  .back-container {
-    flex: 1;
-    width: 100px;
-    height: 36px;
+  .image-wrap {
+    width: 650px;
+    margin-top: 50px;
+    margin-left: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    color: #666666;
+  }
+  .image {
+    width: 160px;
+    height: 160px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+  .add-image {
+    background-color: #dddddd;
+    text-align: center;
     flex-direction: row;
     align-items: center;
-  }
-  .back-icon {
-    width: 20px;
-    height: 35px;
-  }
-  .back-title {
-    margin-left: 15px;
-    color: #ffffff;
-  }
-  .title {
-    flex: 2;
-    color: #ffffff;
-    text-align: center;
-  }
-  .add-message-container {
-    flex: 1;
-    /*justify-content: flex-end;*/
-    flex-direction: row-reverse;
-  }
-  .add-message {
-    width: 46px;
-    height: 36px;
-  }
-  .page-content {
-    width: 750px;
-    height: 1335px;
-    /*background: gray;*/
-  }
-  .user-background {
-    width: 750px;
-    height: 500px;
-  }
-  .user-info-container {
-    flex-direction: row-reverse;
-    top: -100px;
-    right: 20px;
-  }
-  .avatar {
-    width: 150px;
-    height: 150px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-width: 4px;
-  }
-  .nickname {
-    color: #ffffff;
-    font-size: 36px;
-    margin-right: 45px;
-    text-align: right;
-    line-height: 100px;
   }
 </style>

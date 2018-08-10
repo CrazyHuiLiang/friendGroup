@@ -1,15 +1,13 @@
 <template>
   <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
-    <div class="header" :class="[platform === 'ios' ? 'is-ios-header' : '']">
-      <div class="back-container">
-        <image class="back-icon" :src="ui.back" resize="cover"></image>
-        <text class="back-title">发现</text>
-      </div>
-      <text class="title">朋友圈</text>
-      <div class="add-message-container" @click="gotoAddMessage">
+    <wxc-minibar title="朋友圈"
+                 background-color="#009ff0"
+                 text-color="#FFFFFF">
+      <div class="add-message-container" slot="right" @click="gotoAddMessage">
         <image class="add-message" :src="ui.addMassage"></image>
       </div>
-    </div>
+    </wxc-minibar>
+
     <scroller v-if="userInfo" class="page-content">
       <image class="user-background" :src="userInfo.background" @click="userBackgroundClicked"></image>
       <div class="user-info-container">
@@ -31,6 +29,11 @@ import {getImagePath, getEntryUrl} from './util/util'
 import { getMessageList, getUserInfo, updateUserInfo } from './api/index'
 import ImagePicker from './components/ImagePicker'
 import Message from './components/Message.vue'
+import {
+  WxcButton,
+  WxcMinibar,
+  WxcCell
+} from 'weex-ui'
 let navigator = weex.requireModule('navigator')
 let modal = weex.requireModule('modal')
 
@@ -95,6 +98,9 @@ export default {
     }
   },
   components: {
+    WxcButton,
+    WxcMinibar,
+    WxcCell,
     ImagePicker,
     Message
   }
@@ -105,44 +111,6 @@ export default {
   .wrapper {
     /*justify-content: center;*/
     /*align-items: center;*/
-  }
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 750px;
-    height: 100px;
-    background-color: #373a3f;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .is-ios-header {
-    top: -50px;
-    padding-top: 30px;
-    height: 130px;
-  }
-  .back-container {
-    flex: 1;
-    width: 100px;
-    height: 36px;
-    flex-direction: row;
-    align-items: center;
-  }
-  .back-icon {
-    width: 20px;
-    height: 35px;
-  }
-  .back-title {
-    margin-left: 15px;
-    color: #ffffff;
-  }
-  .title {
-    flex: 2;
-    color: #ffffff;
-    text-align: center;
   }
   .add-message-container {
     flex: 1;

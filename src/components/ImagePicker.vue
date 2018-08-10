@@ -35,10 +35,11 @@ export default {
           reader.readAsDataURL(file)
           reader.onload = () => {
             imagePicker.removeChild(input)
-            callback({
+            const fileInfo = {
               name: file.name,
               url: reader.result
-            })
+            }
+            callback(fileInfo)
           }
         }
       }
@@ -50,5 +51,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .image-picker {
+    display: none;
+  }
 </style>
