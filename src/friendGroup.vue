@@ -8,27 +8,28 @@
       </div>
     </wxc-minibar>
 
-    <scroller v-if="userInfo" class="page-content">
+    <div v-if="userInfo" class="page-content">
       <image class="user-background" :src="userInfo.background" @click="userBackgroundClicked"></image>
       <div class="user-info-container">
         <div class="avatar-container">
           <image class="avatar" :src="userInfo.avatar" @click="userAvatarClicked"></image>
         </div>
-        <text class="nickname" @click="nickNameClicked">{{userInfo.nickName}}</text>
+        <text class="nickname">{{userInfo.nickname}}</text>
       </div>
       <div class="message-container">
-        <Message class="row" v-for="(item, index) in list" :userInfo="userInfo" :message="item" :ref="'item'+index" :key="index"></Message>
+        <Message class="row" v-for="(item, index) in list" :message="item" :ref="'item'+index" :key="item.id"></Message>
       </div>
-    </scroller>
+    </div>
     <image-picker ref="imagePicker"></image-picker>
   </div>
 </template>
 
 <script>
 import {getImagePath, getEntryUrl} from './util/util'
-import { getMessageList, getUserInfo, updateUserInfo } from './api/index'
+import { listFriendsGroup, updateUserInfo } from './api/index'
 import ImagePicker from './components/ImagePicker'
 import Message from './components/Message.vue'
+import store from './store/index'
 import {
   WxcButton,
   WxcMinibar,
@@ -51,33 +52,31 @@ export default {
     }
   },
   mounted () {
-    getUserInfo((response) => {
-      this.userInfo = response
-    })
-    getMessageList((response) => {
-      this.list = response
+    store.dispatch('getUserInfo').then(userInfo => {
+      this.userInfo = userInfo
+
+      // 获取朋友圈列表
+      this.listFriendsGroup()
     })
   },
   methods: {
+    listFriendsGroup () {
+      listFriendsGroup(this.userInfo.id, 0, 10).then(({data}) => {
+        if (data.state) {
+          this.list = data.info
+        } else {
+          console.log(data.info)
+        }
+      }, error => {
+        console.error(error)
+      })
+    },
     gotoAddMessage () {
       navigator.push({
         url: getEntryUrl('add'),
         animated: 'true'
       }, event => {
         // modal.toast({ message: 'callback: ' + event })
-      })
-    },
-    nickNameClicked () {
-      modal.prompt({
-        message: '请输入您的昵称',
-        okTitle: '确定',
-        cancelTitle: '取消'
-      }, r => {
-        if (r.result === '确定') {
-          updateUserInfo({nickName: r.data}, newInfo => {
-            this.userInfo = newInfo
-          })
-        }
       })
     },
     userBackgroundClicked () {
@@ -89,12 +88,6 @@ export default {
       })
     },
     userAvatarClicked () {
-      let imagePicker = this.$refs.imagePicker
-      imagePicker.pick((url) => {
-        updateUserInfo({avatar: url}, newInfo => {
-          this.userInfo = newInfo
-        })
-      })
     }
   },
   components: {
@@ -127,6 +120,7 @@ export default {
     /*background: gray;*/
   }
   .user-background {
+    background-color: #666666;
     width: 750px;
     height: 500px;
   }
