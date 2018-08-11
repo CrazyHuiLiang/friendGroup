@@ -9,15 +9,15 @@
     </wxc-minibar>
 
     <div v-if="userInfo" class="page-content">
-      <image class="user-background" :src="userInfo.background" @click="userBackgroundClicked"></image>
+      <image class="user-background" :src="userInfo.avatar" resize="cover" @click="userBackgroundClicked"></image>
       <div class="user-info-container">
         <div class="avatar-container">
-          <image class="avatar" :src="userInfo.avatar" @click="userAvatarClicked"></image>
+          <image class="avatar" :src="userInfo.avatar" resize="cover" @click="userAvatarClicked"></image>
         </div>
         <text class="nickname">{{userInfo.nickname}}</text>
       </div>
       <div class="message-container">
-        <Message class="row" v-for="(item, index) in list" :message="item" :ref="'item'+index" :key="item.id"></Message>
+        <Message class="row" v-for="(item, index) in list" :message="item" :ref="'item'+index" :key="item.id" @reloadData="reloadData"></Message>
       </div>
     </div>
     <image-picker ref="imagePicker"></image-picker>
@@ -26,7 +26,9 @@
 
 <script>
 import {getImagePath, getEntryUrl} from './util/util'
-import { listFriendsGroup, updateUserInfo } from './api/index'
+import {
+  listFriendsGroup
+} from './api/index'
 import ImagePicker from './components/ImagePicker'
 import Message from './components/Message.vue'
 import store from './store/index'
@@ -36,7 +38,7 @@ import {
   WxcCell
 } from 'weex-ui'
 let navigator = weex.requireModule('navigator')
-let modal = weex.requireModule('modal')
+// let modal = weex.requireModule('modal')
 
 export default {
   name: 'App',
@@ -80,14 +82,17 @@ export default {
       })
     },
     userBackgroundClicked () {
-      let imagePicker = this.$refs.imagePicker
-      imagePicker.pick((url) => {
-        updateUserInfo({background: url}, newInfo => {
-          this.userInfo = newInfo
-        })
-      })
+      // let imagePicker = this.$refs.imagePicker
+      // imagePicker.pick((url) => {
+      //   updateUserInfo({background: url}, newInfo => {
+      //     this.userInfo = newInfo
+      //   })
+      // })
     },
     userAvatarClicked () {
+    },
+    reloadData () {
+      this.listFriendsGroup()
     }
   },
   components: {

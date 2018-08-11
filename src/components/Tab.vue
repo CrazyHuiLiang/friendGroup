@@ -46,7 +46,7 @@ export default {
   }
 
   .active-title {
-    color: blue;
+    color: #009ff0;
   }
 
 </style>

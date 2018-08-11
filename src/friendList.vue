@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <wxc-minibar title="通讯录"
-                 background-color="#111111"
+                 background-color="#009ff0"
                  text-color="#FFFFFF"
-                 left-text=""
+                 leftButton=""
                  right-text="搜索"
                  @wxcMinibarRightButtonClicked="gotoSearchUser"></wxc-minibar>
     <div class="new-friend" @click='gotoNewFriend'>
@@ -79,8 +79,9 @@ export default {
       })
     },
     userClicked (user) {
+      store.commit('setViewUserInfo', user)
       navigator.push({
-        url: getEntryUrl('album'),
+        url: getEntryUrl('userDetail'),
         animated: 'true'
       }, event => {
         // modal.toast({ message: 'callback: ' + event })

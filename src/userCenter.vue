@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
     <wxc-minibar title="个人中心"
-                 background-color="#111111"
+                 background-color="#009ff0"
                  text-color="#FFFFFF"
-                 left-text=""
+                 leftButton=""
                  right-text=""></wxc-minibar>
     <div v-if="userInfo !== null" class='user-center-wrap'>
       <div class="user-info-wrap">
@@ -45,7 +45,6 @@ export default {
   mounted () {
     store.dispatch('getUserInfo').then(userInfo => {
       this.userInfo = userInfo
-      console.log(userInfo)
     })
   },
   methods: {
@@ -71,6 +70,7 @@ export default {
     },
     // 跳转到个人相册
     gotoAlbum () {
+      store.commit('setViewAlumUserAccount', this.userInfo.account)
       navigator.push({
         url: getEntryUrl('album'),
         animated: 'true'
@@ -88,7 +88,13 @@ export default {
     },
     // 退出登录
     logout () {
-      console.log('logout')
+      store.commit('setUserInfo', null)
+      navigator.push({
+        url: getEntryUrl('login'),
+        animated: 'true'
+      }, event => {
+        // modal.toast({ message: 'callback: ' + event })
+      })
     }
   },
   components: {
