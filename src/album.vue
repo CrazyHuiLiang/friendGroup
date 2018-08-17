@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
-    <wxc-minibar title="个人相册"
+    <wxc-minibar title="个人相册" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF">
     </wxc-minibar>

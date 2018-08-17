@@ -1,8 +1,8 @@
 // import { getImagePath } from '../util/util'
 // const storage = weex.requireModule('storage')
 const stream = weex.requireModule('stream')
-const host = ''
-// host = 'http://127.0.0.1:3000'
+let host = ''
+// host = 'http://172.16.95.39:3000'
 // 封装发送get请求的方法
 function get (url, processHandler) {
   return new Promise((resolve, reject) => {

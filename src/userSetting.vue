@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="个人设置"
+    <wxc-minibar title="个人设置" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF"></wxc-minibar>
 

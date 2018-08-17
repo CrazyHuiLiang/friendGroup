@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar left-text="取消" title="发朋友圈" right-text="确定" background-color="#009ff0" text-color="#FFFFFF" @wxcMinibarRightButtonClicked="addMessage"></wxc-minibar>
+    <wxc-minibar left-text="取消" style="padding-top: 30px;" title="发朋友圈" right-text="确定" background-color="#009ff0" text-color="#FFFFFF" @wxcMinibarRightButtonClicked="addMessage"></wxc-minibar>
     <textarea class="textarea" :rows="3" v-model="content"></textarea>
     <div class="image-wrap">
       <image class="image" v-for="(image, index) in images" :key='index' :src="image" @click="removeImage(index)"></image>

@@ -32,11 +32,11 @@ export default {
   name: 'login',
   data () {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      account: '',
+      password: ''
     }
   },
-  mounted () {
+  created () {
     store.dispatch('getUserInfo').then(userInfo => {
       if (userInfo) {
         this.gotoFriendList()
@@ -55,8 +55,8 @@ export default {
         })
       } else {
         login(this.account, this.password).then(({data}) => {
+          console.log('login data:', data)
           if (data.state === true) {
-            console.log('login', data)
             store.commit('setUserInfo', data.info)
             this.gotoFriendList()
           } else {
@@ -74,7 +74,6 @@ export default {
         url: getEntryUrl('register'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     },
     gotoFriendList (e) {
@@ -82,7 +81,6 @@ export default {
         url: getEntryUrl('friendList'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     }
   },

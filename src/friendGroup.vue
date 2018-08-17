@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
-    <wxc-minibar title="朋友圈"
+    <wxc-minibar title="朋友圈" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF">
       <div class="add-message-container" slot="right" @click="gotoAddMessage">

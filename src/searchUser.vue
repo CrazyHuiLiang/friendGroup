@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="添加朋友"
+    <wxc-minibar title="添加朋友" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF"
                  @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"

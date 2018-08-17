@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="个人中心"
+    <wxc-minibar title="个人中心" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF"
                  leftButton=""
@@ -42,7 +42,7 @@ export default {
       userInfo: null
     }
   },
-  mounted () {
+  created () {
     store.dispatch('getUserInfo').then(userInfo => {
       this.userInfo = userInfo
     })
@@ -78,6 +78,7 @@ export default {
         // modal.toast({ message: 'callback: ' + event })
       })
     },
+    // 跳转到用户设置
     gotoUserSetting () {
       navigator.push({
         url: getEntryUrl('userSetting'),

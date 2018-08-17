@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="好友详情"
+    <wxc-minibar title="好友详情" style="padding-top: 30px;"
                  background-color="#009ff0"
                  text-color="#FFFFFF"
                  right-text=""></wxc-minibar>

@@ -4,8 +4,8 @@
                  background-color="#009ff0"
                  text-color="#FFFFFF"
                  leftButton=""
-                 right-text="搜索"
-                 @wxcMinibarRightButtonClicked="gotoSearchUser"></wxc-minibar>
+                 right-text="添加"
+                 @wxcMinibarRightButtonClicked="gotoSearchUser" style="padding-top: 30px;"></wxc-minibar>
     <div class="new-friend" @click='gotoNewFriend'>
       <text class="new-frined-text">新的朋友</text>
     </div>
@@ -110,7 +110,7 @@ export default {
     width: 750px;
     height: 80px;
     font-size: 30px;
-    background: #dddddd;
+    background-color: #dddddd;
   }
   .new-frined-text {
     line-height: 80px;
