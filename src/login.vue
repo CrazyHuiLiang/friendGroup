@@ -1,18 +1,16 @@
 <template>
   <div class="wrapper">
     <text class="title">登录</text>
-    <wxc-cell label="账号"
-              :has-arrow="false"
-              :has-margin="true">
+    <wxc-cell label="账号" :has-arrow="false" :has-margin="true">
       <input slot="title" placeholder="请填写账号" v-model="account"/>
     </wxc-cell>
-    <wxc-cell label="密码"
-              :has-arrow="false"
-              :has-margin="true">
+    <wxc-cell label="密码" :has-arrow="false" :has-margin="true">
       <input slot="title" placeholder="请填写密码" type="password" v-model="password"/>
     </wxc-cell>
-    <text @click="gotoRegister">还没有账号</text>
-    <WxcButton type="blue" text="登录" @wxcButtonClicked="login"></WxcButton>
+    <text class="goto-register" @click="gotoRegister">还没有账号</text>
+    <div class="row-center">
+      <WxcButton type="blue" text="登录" @wxcButtonClicked="login"></WxcButton>
+    </div>
   </div>
 </template>
 
@@ -29,7 +27,7 @@ import {getEntryUrl} from './util/util'
 const navigator = weex.requireModule('navigator')
 const modal = weex.requireModule('modal')
 export default {
-  name: 'login',
+  name: 'Login',
   data () {
     return {
       account: '',
@@ -69,6 +67,7 @@ export default {
         })
       }
     },
+    // 跳转到注册页面
     gotoRegister (e) {
       navigator.push({
         url: getEntryUrl('register'),
@@ -76,6 +75,7 @@ export default {
       }, event => {
       })
     },
+    // 跳转到通讯录页面
     gotoFriendList (e) {
       navigator.push({
         url: getEntryUrl('friendList'),
@@ -99,5 +99,15 @@ export default {
     text-align: center;
     margin-top: 100px;
     margin-bottom: 100px;
+  }
+  .goto-register {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    color: #238FFF;
+  }
+  .row-center {
+    flex-direction: row;
+    justify-content: center;
   }
 </style>

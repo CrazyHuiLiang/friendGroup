@@ -1,18 +1,16 @@
 <template>
   <div class="wrapper">
     <text class="title">注册</text>
-    <wxc-cell label="账号"
-              :has-arrow="false"
-              :has-margin="true">
+    <wxc-cell label="账号" :has-arrow="false" :has-margin="true">
       <input slot="title" placeholder="请填写账号" v-model="account"/>
     </wxc-cell>
-    <wxc-cell label="密码"
-              :has-arrow="false"
-              :has-margin="true">
+    <wxc-cell label="密码" :has-arrow="false" :has-margin="true">
       <input slot="title" placeholder="请填写密码" type="password" v-model="password"/>
     </wxc-cell>
-    <text @click="gotoLogin">已有有账号，去登录</text>
-    <WxcButton type="blue" text="注册" @wxcButtonClicked="register"></WxcButton>
+    <text class="goto-login" @click="gotoLogin">已有有账号，去登录</text>
+    <div class="row-center">
+      <WxcButton class="commit-bt" type="blue" text="注册" @wxcButtonClicked="register"></WxcButton>
+    </div>
   </div>
 </template>
 
@@ -22,25 +20,17 @@ import {
   WxcCell
 } from 'weex-ui'
 import { register } from './api/index'
-import store from './store/index'
-// import {getEntryUrl} from './util/util'
 const navigator = weex.requireModule('navigator')
 const modal = weex.requireModule('modal')
 export default {
-  name: 'login',
-  store,
+  name: 'Register',
   data () {
     return {
-      account: 'crazyhuiliang',
-      password: 'abcd1234'
+      account: '',
+      password: ''
     }
   },
-  mounted () {
-    this.$store.dispatch('getUserInfo').then(userInfo => {
-      if (userInfo) {
-        this.gotoFriendList()
-      }
-    })
+  created () {
   },
   methods: {
     register (e) {
@@ -85,5 +75,15 @@ export default {
     text-align: center;
     margin-top: 100px;
     margin-bottom: 100px;
+  }
+  .goto-login {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    color: #238FFF;
+  }
+  .row-center {
+    flex-direction: row;
+    justify-content: center;
   }
 </style>
