@@ -31,8 +31,6 @@ import {
 } from './api/index'
 import store from './store/index'
 const modal = weex.requireModule('modal')
-// const navigator = weex.requireModule('navigator')
-
 export default {
   name: '',
   props: {

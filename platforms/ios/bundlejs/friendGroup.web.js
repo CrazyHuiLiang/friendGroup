@@ -41813,7 +41813,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-2f871f2a] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.add-message-container[data-v-2f871f2a] {\n  -ms-flex: 1;\n      flex: 1;\n  /*justify-content: flex-end;*/\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n}\n.add-message[data-v-2f871f2a] {\n  width: 46px;\n  height: 36px;\n}\n.page-content[data-v-2f871f2a] {\n  width: 750px;\n  height: 1335px;\n  /*background: gray;*/\n}\n.user-background[data-v-2f871f2a] {\n  background-color: #666666;\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-2f871f2a] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  margin-top: -100px;\n  margin-right: 20px;\n}\n.avatar-container[data-v-2f871f2a] {\n  width: 150px;\n  height: 150px;\n  background-color: #ffffff;\n  padding-top: 4px;\n  padding-right: 4px;\n  padding-bottom: 4px;\n  padding-left: 4px;\n  border-style: solid;\n  border-color: #cccccc;\n  border-width: 2px;\n}\n.avatar[data-v-2f871f2a] {\n  width: 138px;\n  height: 138px;\n}\n.nickname[data-v-2f871f2a] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n.message-container[data-v-2f871f2a] {\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-2f871f2a] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.add-message-container[data-v-2f871f2a] {\n  -ms-flex: 1;\n      flex: 1;\n  /*justify-content: flex-end;*/\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n}\n.add-message[data-v-2f871f2a] {\n  width: 46px;\n  height: 36px;\n}\n.page-content[data-v-2f871f2a] {\n  width: 750px;\n  /*height: 1335px;*/\n  /*background: gray;*/\n}\n.user-background[data-v-2f871f2a] {\n  background-color: #666666;\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-2f871f2a] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  margin-top: -100px;\n  margin-right: 20px;\n}\n.avatar-container[data-v-2f871f2a] {\n  width: 150px;\n  height: 150px;\n  background-color: #ffffff;\n  padding-top: 4px;\n  padding-right: 4px;\n  padding-bottom: 4px;\n  padding-left: 4px;\n  border-style: solid;\n  border-color: #cccccc;\n  border-width: 2px;\n}\n.avatar[data-v-2f871f2a] {\n  width: 138px;\n  height: 138px;\n}\n.nickname[data-v-2f871f2a] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n.message-container[data-v-2f871f2a] {\n}\n", ""]);
 
 // exports
 
@@ -41875,6 +41875,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 
 var navigator = weex.requireModule('navigator');
 // let modal = weex.requireModule('modal')
@@ -41884,6 +41886,7 @@ exports.default = {
   data: function data() {
     return {
       ui: {
+        pageHeight: _weexUi.Utils.env.getPageHeight(),
         back: (0, _util.getImagePath)('back', '.png'),
         addMassage: (0, _util.getImagePath)('addMessage', '.png')
       },
@@ -41987,11 +41990,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.ui.addMassage
     }
-  })])]), _vm._v(" "), (_vm.userInfo) ? _c('div', {
+  })])]), _vm._v(" "), (_vm.userInfo) ? _c('list', {
     staticClass: "page-content",
     staticStyle: _vm.$processStyle(undefined),
-    style: (_vm.$processStyle(undefined))
-  }, [_c('image', {
+    style: (_vm.$processStyle({
+      height: _vm.ui.pageHeight + 'px'
+    }))
+  }, [_c('cell', [_c('image', {
     staticClass: "user-background",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
@@ -42002,7 +42007,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.userBackgroundClicked
     }
-  }), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('cell', {
     staticClass: "user-info-container",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
@@ -42025,7 +42030,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nickname",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _vm._v(" "), _c('cell', {
     staticClass: "message-container",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
@@ -42044,7 +42049,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "reloadData": _vm.reloadData
       }
     })
-  }))]) : _vm._e(), _vm._v(" "), _c('image-picker', {
+  }))], 1) : _vm._e(), _vm._v(" "), _c('image-picker', {
     ref: "imagePicker",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))

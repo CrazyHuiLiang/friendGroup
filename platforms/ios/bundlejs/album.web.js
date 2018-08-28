@@ -41807,7 +41807,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-16ff88d8] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.page-content[data-v-16ff88d8] {\n  width: 750px;\n  height: 1335px;\n  /*background: gray;*/\n}\n.user-background[data-v-16ff88d8] {\n  background-color: #666666;\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-16ff88d8] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  margin-top: -100px;\n  margin-right: 20px;\n}\n.avatar-container[data-v-16ff88d8] {\n  width: 150px;\n  height: 150px;\n  background-color: #ffffff;\n  padding-top: 4px;\n  padding-right: 4px;\n  padding-bottom: 4px;\n  padding-left: 4px;\n  border-style: solid;\n  border-color: #cccccc;\n  border-width: 2px;\n}\n.avatar[data-v-16ff88d8] {\n  width: 138px;\n  height: 138px;\n}\n.nickname[data-v-16ff88d8] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n.message-container[data-v-16ff88d8] {\n}\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-16ff88d8] {\n  /*justify-content: center;*/\n  /*align-items: center;*/\n}\n.page-content[data-v-16ff88d8] {\n  width: 750px;\n  /*height: 1335px;*/\n  /*background: gray;*/\n}\n.user-background[data-v-16ff88d8] {\n  background-color: #666666;\n  width: 750px;\n  height: 500px;\n}\n.user-info-container[data-v-16ff88d8] {\n  -ms-flex-direction: row-reverse;\n      flex-direction: row-reverse;\n  margin-top: -100px;\n  margin-right: 20px;\n}\n.avatar-container[data-v-16ff88d8] {\n  width: 150px;\n  height: 150px;\n  background-color: #ffffff;\n  padding-top: 4px;\n  padding-right: 4px;\n  padding-bottom: 4px;\n  padding-left: 4px;\n  border-style: solid;\n  border-color: #cccccc;\n  border-width: 2px;\n}\n.avatar[data-v-16ff88d8] {\n  width: 138px;\n  height: 138px;\n}\n.nickname[data-v-16ff88d8] {\n  color: #ffffff;\n  font-size: 36px;\n  margin-right: 45px;\n  text-align: right;\n  line-height: 100px;\n}\n.message-container[data-v-16ff88d8] {\n}\n", ""]);
 
 // exports
 
@@ -41846,6 +41846,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let navigator = weex.requireModule('navigator')
 // let modal = weex.requireModule('modal')
 
+//
+//
 //
 //
 //
@@ -41948,11 +41950,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "background-color": "#009ff0",
       "text-color": "#FFFFFF"
     }
-  }), _vm._v(" "), (_vm.userInfo) ? _c('div', {
+  }), _vm._v(" "), (_vm.userInfo) ? _c('list', {
     staticClass: "page-content",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_c('image', {
+  }, [_c('cell', [_c('image', {
     staticClass: "user-background",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined)),
@@ -41960,7 +41962,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "src": _vm.userInfo.avatar,
       "resize": "cover"
     }
-  }), _vm._v(" "), _c('div', {
+  })]), _vm._v(" "), _c('cell', {
     staticClass: "user-info-container",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
@@ -41980,7 +41982,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nickname",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
-  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _vm._v(" "), _c('cell', {
     staticClass: "message-container",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))
@@ -41999,7 +42001,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "reloadData": _vm.reloadData
       }
     })
-  }))]) : _vm._e(), _vm._v(" "), _c('image-picker', {
+  }))], 1) : _vm._e(), _vm._v(" "), _c('image-picker', {
     ref: "imagePicker",
     staticStyle: _vm.$processStyle(undefined),
     style: (_vm.$processStyle(undefined))

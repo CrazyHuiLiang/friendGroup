@@ -27525,8 +27525,7 @@ module.exports = {
     "height": "36"
   },
   "page-content": {
-    "width": "750",
-    "height": "1335"
+    "width": "750"
   },
   "user-background": {
     "backgroundColor": "#666666",
@@ -27620,6 +27619,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 
 var navigator = weex.requireModule('navigator');
 // let modal = weex.requireModule('modal')
@@ -27629,6 +27630,7 @@ exports.default = {
   data: function data() {
     return {
       ui: {
+        pageHeight: _weexUi.Utils.env.getPageHeight(),
         back: (0, _util.getImagePath)('back', '.png'),
         addMassage: (0, _util.getImagePath)('addMessage', '.png')
       },
@@ -27725,8 +27727,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "src": _vm.ui.addMassage
     }
-  })])]), (_vm.userInfo) ? _c('div', {
-    staticClass: ["page-content"]
+  })])]), (_vm.userInfo) ? _c('list', {
+    staticClass: ["page-content"],
+    style: {
+      height: _vm.ui.pageHeight + 'px'
+    }
+  }, [_c('cell', {
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, [_c('image', {
     staticClass: ["user-background"],
     attrs: {
@@ -27736,8 +27746,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.userBackgroundClicked
     }
-  }), _c('div', {
-    staticClass: ["user-info-container"]
+  })]), _c('cell', {
+    staticClass: ["user-info-container"],
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, [_c('div', {
     staticClass: ["avatar-container"]
   }, [_c('image', {
@@ -27751,8 +27765,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _c('text', {
     staticClass: ["nickname"]
-  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _c('div', {
-    staticClass: ["message-container"]
+  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _c('cell', {
+    staticClass: ["message-container"],
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, _vm._l((_vm.list), function(item, index) {
     return _c('Message', {
       key: item.id,

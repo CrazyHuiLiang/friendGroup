@@ -5,18 +5,20 @@
                  text-color="#FFFFFF">
     </wxc-minibar>
 
-    <div v-if="userInfo" class="page-content">
-      <image class="user-background" :src="userInfo.avatar" resize="cover"></image>
-      <div class="user-info-container">
+    <list v-if="userInfo" class="page-content">
+      <cell>
+        <image class="user-background" :src="userInfo.avatar" resize="cover"></image>
+      </cell>
+      <cell class="user-info-container">
         <div class="avatar-container">
           <image class="avatar" :src="userInfo.avatar" resize="cover"></image>
         </div>
         <text class="nickname">{{userInfo.nickname}}</text>
-      </div>
-      <div class="message-container">
+      </cell>
+      <cell class="message-container">
         <Message class="row" v-for="(item, index) in list" :message="item" :ref="'item'+index" :key="item.id" @reloadData="reloadData"></Message>
-      </div>
-    </div>
+      </cell>
+    </list>
     <image-picker ref="imagePicker"></image-picker>
   </div>
 </template>
@@ -95,7 +97,7 @@ export default {
   }
   .page-content {
     width: 750px;
-    height: 1335px;
+    /*height: 1335px;*/
     /*background: gray;*/
   }
   .user-background {

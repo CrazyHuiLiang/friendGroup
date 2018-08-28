@@ -27513,8 +27513,7 @@ new Vue(module.exports)
 
 module.exports = {
   "page-content": {
-    "width": "750",
-    "height": "1335"
+    "width": "750"
   },
   "user-background": {
     "backgroundColor": "#666666",
@@ -27585,6 +27584,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // let navigator = weex.requireModule('navigator')
 // let modal = weex.requireModule('modal')
 
+//
+//
 //
 //
 //
@@ -27684,16 +27685,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "backgroundColor": "#009ff0",
       "textColor": "#FFFFFF"
     }
-  }), (_vm.userInfo) ? _c('div', {
+  }), (_vm.userInfo) ? _c('list', {
     staticClass: ["page-content"]
+  }, [_c('cell', {
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, [_c('image', {
     staticClass: ["user-background"],
     attrs: {
       "src": _vm.userInfo.avatar,
       "resize": "cover"
     }
-  }), _c('div', {
-    staticClass: ["user-info-container"]
+  })]), _c('cell', {
+    staticClass: ["user-info-container"],
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, [_c('div', {
     staticClass: ["avatar-container"]
   }, [_c('image', {
@@ -27704,8 +27714,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   })]), _c('text', {
     staticClass: ["nickname"]
-  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _c('div', {
-    staticClass: ["message-container"]
+  }, [_vm._v(_vm._s(_vm.userInfo.nickname))])]), _c('cell', {
+    staticClass: ["message-container"],
+    appendAsTree: true,
+    attrs: {
+      "append": "tree"
+    }
   }, _vm._l((_vm.list), function(item, index) {
     return _c('Message', {
       key: item.id,

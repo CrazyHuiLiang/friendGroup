@@ -8,18 +8,20 @@
       </div>
     </wxc-minibar>
 
-    <div v-if="userInfo" class="page-content">
-      <image class="user-background" :src="userInfo.avatar" resize="cover" @click="userBackgroundClicked"></image>
-      <div class="user-info-container">
+    <list v-if="userInfo" class="page-content" :style="{height: ui.pageHeight + 'px'}">
+      <cell>
+        <image class="user-background" :src="userInfo.avatar" resize="cover" @click="userBackgroundClicked"></image>
+      </cell>
+      <cell class="user-info-container">
         <div class="avatar-container">
           <image class="avatar" :src="userInfo.avatar" resize="cover" @click="userAvatarClicked"></image>
         </div>
         <text class="nickname">{{userInfo.nickname}}</text>
-      </div>
-      <div class="message-container">
+      </cell>
+      <cell class="message-container">
         <Message class="row" v-for="(item, index) in list" :message="item" :ref="'item'+index" :key="item.id" @reloadData="reloadData"></Message>
-      </div>
-    </div>
+      </cell>
+    </list>
     <image-picker ref="imagePicker"></image-picker>
   </div>
 </template>
@@ -33,6 +35,7 @@ import ImagePicker from './components/ImagePicker'
 import Message from './components/Message.vue'
 import store from './store/index'
 import {
+  Utils,
   WxcButton,
   WxcMinibar,
   WxcCell
@@ -45,6 +48,7 @@ export default {
   data () {
     return {
       ui: {
+        pageHeight: Utils.env.getPageHeight(),
         back: getImagePath('back', '.png'),
         addMassage: getImagePath('addMessage', '.png')
       },
@@ -121,7 +125,7 @@ export default {
   }
   .page-content {
     width: 750px;
-    height: 1335px;
+    /*height: 1335px;*/
     /*background: gray;*/
   }
   .user-background {
