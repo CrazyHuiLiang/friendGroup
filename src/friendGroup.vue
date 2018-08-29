@@ -1,20 +1,17 @@
 <template>
   <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
-    <wxc-minibar title="朋友圈" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF">
+    <wxc-minibar title="朋友圈" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF">
       <div class="add-message-container" slot="right" @click="gotoAddMessage">
         <image class="add-message" :src="ui.addMassage"></image>
       </div>
     </wxc-minibar>
-
     <list v-if="userInfo" class="page-content" :style="{height: ui.pageHeight + 'px'}">
       <cell>
-        <image class="user-background" :src="userInfo.avatar" resize="cover" @click="userBackgroundClicked"></image>
+        <image class="user-background" :src="userInfo.avatar" resize="cover"></image>
       </cell>
       <cell class="user-info-container">
         <div class="avatar-container">
-          <image class="avatar" :src="userInfo.avatar" resize="cover" @click="userAvatarClicked"></image>
+          <image class="avatar" :src="userInfo.avatar" resize="cover"></image>
         </div>
         <text class="nickname">{{userInfo.nickname}}</text>
       </cell>
@@ -44,7 +41,7 @@ let navigator = weex.requireModule('navigator')
 // let modal = weex.requireModule('modal')
 
 export default {
-  name: 'App',
+  name: 'FriendGroup',
   data () {
     return {
       ui: {
@@ -60,7 +57,6 @@ export default {
   mounted () {
     store.dispatch('getUserInfo').then(userInfo => {
       this.userInfo = userInfo
-
       // 获取朋友圈列表
       this.listFriendsGroup()
     })
@@ -82,18 +78,7 @@ export default {
         url: getEntryUrl('add'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
-    },
-    userBackgroundClicked () {
-      // let imagePicker = this.$refs.imagePicker
-      // imagePicker.pick((url) => {
-      //   updateUserInfo({background: url}, newInfo => {
-      //     this.userInfo = newInfo
-      //   })
-      // })
-    },
-    userAvatarClicked () {
     },
     reloadData () {
       this.listFriendsGroup()

@@ -1,18 +1,14 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="新的朋友" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"
-                 @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                 @wxcMinibarRightButtonClicked="minibarRightButtonClick"></wxc-minibar>
+    <wxc-minibar title="新的朋友" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF"></wxc-minibar>
     <div>
       <text v-if="users===null" class="no-user">暂无内容</text>
       <div v-else>
         <div v-for="user in users" :key="user.id" class="user">
           <image style="width:50px;height:50px" :src="user.avatar"></image>
           <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
-          <wxc-button v-if="user.flag === 0" text="添加" type='blue' size='small' @wxcButtonClicked="wxcButtonClicked(user.userId, 1)"></wxc-button>
-          <wxc-button v-if="user.flag === 0" text="拒绝" type='red' size='small' @wxcButtonClicked="wxcButtonClicked(user.userId, 2)"></wxc-button>
+          <wxc-button v-if="user.flag === 0" text="添加" type='blue' size='small' @wxcButtonClicked="handleRequest(user.userId, 1)"></wxc-button>
+          <wxc-button v-if="user.flag === 0" text="拒绝" type='red' size='small' @wxcButtonClicked="handleRequest(user.userId, 2)"></wxc-button>
           <text v-if="user.flag === 1">已添加</text>
           <text v-if="user.flag === 2">已拒绝</text>
         </div>
@@ -35,7 +31,7 @@ const modal = weex.requireModule('modal')
 // const navigator = weex.requireModule('navigator')
 
 export default {
-  name: '',
+  name: 'NewFriend',
   props: {
   },
   data () {
@@ -44,16 +40,11 @@ export default {
     }
   },
   mounted () {
-    this.selectAddMyFriendRequest()
+    this.loadRequests()
   },
   methods: {
-    minibarLeftButtonClick () {
-      // navigator.pop()
-    },
-    minibarRightButtonClick () {
-      modal.toast({ 'message': 'click rightButton!', 'duration': 1 })
-    },
-    selectAddMyFriendRequest (e) {
+    // 查找添加好友的申请
+    loadRequests (e) {
       store.dispatch('getUserInfo').then(userInfo => {
         return selectAddMyFriendRequest(userInfo.id)
       }).then(({ data }) => {
@@ -69,7 +60,8 @@ export default {
         console.log(error)
       })
     },
-    wxcButtonClicked (friendId, flag) {
+    // 处理好友请求
+    handleRequest (friendId, flag) {
       store.dispatch('getUserInfo').then(userInfo => {
         return updateAddFriendRequest(userInfo.id, friendId, flag)
       }).then(({ data }) => {
@@ -78,7 +70,7 @@ export default {
             'message': data.info,
             'duration': 1
           })
-          this.selectAddMyFriendRequest()
+          this.loadRequests()
         }
       }, error => {
         console.log(error)

@@ -28,7 +28,7 @@ import {
 } from './api/index'
 let navigator = weex.requireModule('navigator')
 export default {
-  name: 'Add',
+  name: 'AddMessage',
   data () {
     return {
       content: '',

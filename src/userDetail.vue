@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="好友详情" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"
-                 right-text=""></wxc-minibar>
+    <wxc-minibar title="好友详情" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF" right-text=""></wxc-minibar>
     <div v-if="userInfo !== null" class='user-center-wrap'>
       <div class="user-info-wrap">
         <image class="avatar" :src="userInfo.avatar"></image>
@@ -12,11 +9,9 @@
           <text>{{userInfo.account}}</text>
         </div>
       </div>
-
       <div class='entry-wrap'>
         <text class="entry-row" @click="gotoAlbum">相册</text>
       </div>
-
       <text class="logout" @click="removeFriend">删除好友</text>
     </div>
   </div>
@@ -34,7 +29,7 @@ import {removeFriend} from './api/index'
 const navigator = weex.requireModule('navigator')
 const modal = weex.requireModule('modal')
 export default {
-  name: '',
+  name: 'UserDetail',
   data () {
     return {
       userInfo: null
@@ -46,26 +41,6 @@ export default {
     })
   },
   methods: {
-    // 切换tab
-    tabClicked (index) {
-      if (index === 0) {
-        navigator.push({
-          url: getEntryUrl('friendList'),
-          animated: 'true'
-        }, event => {
-          // modal.toast({ message: 'callback: ' + event })
-        })
-      }
-    },
-    // 跳转到朋友圈
-    gotoFriendGroup () {
-      navigator.push({
-        url: getEntryUrl('friendGroup'),
-        animated: 'true'
-      }, event => {
-        // modal.toast({ message: 'callback: ' + event })
-      })
-    },
     // 跳转到个人相册
     gotoAlbum () {
       store.commit('setViewAlumUserAccount', this.userInfo.account)
@@ -73,18 +48,9 @@ export default {
         url: getEntryUrl('album'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     },
-    gotoUserSetting () {
-      navigator.push({
-        url: getEntryUrl('userSetting'),
-        animated: 'true'
-      }, event => {
-        // modal.toast({ message: 'callback: ' + event })
-      })
-    },
-    // 退出登录
+    // 删除好友
     removeFriend () {
       store.dispatch('getUserInfo').then(userInfo => {
         return removeFriend(userInfo.id, this.userInfo.id)
@@ -106,12 +72,6 @@ export default {
   .wrapper {
   }
 
-  .tab {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
   .user-center-wrap {
     background-color: #eeeeee;
   }

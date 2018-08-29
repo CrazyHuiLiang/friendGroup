@@ -1,19 +1,13 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="添加朋友" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"
-                 @wxcMinibarLeftButtonClicked="minibarLeftButtonClick"
-                 @wxcMinibarRightButtonClicked="minibarRightButtonClick"></wxc-minibar>
-    <wxc-searchbar ref="wxc-searchbar"
-                   @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
-                   @wxcSearchbarInputReturned="wxcSearchbarInputReturned"></wxc-searchbar>
+    <wxc-minibar title="添加朋友" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF"></wxc-minibar>
+    <wxc-searchbar ref="wxc-searchbar" @wxcSearchbarCancelClicked="cancelSearch" @wxcSearchbarInputReturned="search"></wxc-searchbar>
     <div>
       <text v-if="user===null" class="no-user">请输入好友账号进行搜索</text>
       <div v-else class="user">
         <image style="width:50px;height:50px" :src="user.avatar"></image>
         <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
-        <wxc-button text="添加好友" type='blue' size='small' @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+        <wxc-button text="添加好友" type='blue' size='small' @wxcButtonClicked="requestAddFriend"></wxc-button>
       </div>
     </div>
   </div>
@@ -32,7 +26,7 @@ import {
 import store from './store/index'
 const modal = weex.requireModule('modal')
 export default {
-  name: '',
+  name: 'SearchUser',
   props: {
   },
   data () {
@@ -44,15 +38,9 @@ export default {
   mounted () {
   },
   methods: {
-    minibarLeftButtonClick () {
-      // navigator.pop()
+    cancelSearch () {
     },
-    minibarRightButtonClick () {
-      modal.toast({ 'message': 'click rightButton!', 'duration': 1 })
-    },
-    wxcSearchbarCancelClicked () {
-    },
-    wxcSearchbarInputReturned (e) {
+    search (e) {
       searchUserWithAccount(e.value).then(({data}) => {
         if (data.state) {
           this.user = data.info[0]
@@ -66,7 +54,7 @@ export default {
         console.log(error)
       })
     },
-    wxcButtonClicked (e) {
+    requestAddFriend (e) {
       store.dispatch('getUserInfo').then(userInfo => {
         return addFriendWithUserId(userInfo.id, this.user.id)
       }).then(({ data }) => {

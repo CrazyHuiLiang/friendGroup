@@ -1,20 +1,12 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="个人设置" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"></wxc-minibar>
-
-    <wxc-cell v-if="userInfo" label="头像"
-              :has-arrow="true"
-              @wxcCellClicked="wxcCellClicked"
-              :has-top-border="false">
+    <wxc-minibar title="个人设置" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF"></wxc-minibar>\
+    <wxc-cell v-if="userInfo" label="头像" :has-arrow="true" @wxcCellClicked="changeAvatar" :has-top-border="false">
       <image slot="value" class="avatar" :src="userInfo.avatar"></image>
     </wxc-cell>
-    <wxc-cell v-if="userInfo" label="昵称"
-              :has-arrow="true"
-              :has-top-border="false">
+    <wxc-cell v-if="userInfo" label="昵称" :has-arrow="true" :has-top-border="false">
       <input slot="value" class="nickName" v-model="nickName">
-      <wxc-button text="确定" type="blue" size="small" @wxcButtonClicked="wxcButtonClicked"></wxc-button>
+      <wxc-button text="确定" type="blue" size="small" @wxcButtonClicked="changeNickname"></wxc-button>
     </wxc-cell>
     <image-picker ref="imagePicker"></image-picker>
   </div>
@@ -35,7 +27,7 @@ import store from './store/index'
 import ImagePicker from './components/ImagePicker'
 const modal = weex.requireModule('modal')
 export default {
-  name: '',
+  name: 'UserSetting',
   props: {
   },
   data () {
@@ -53,7 +45,7 @@ export default {
     })
   },
   methods: {
-    wxcCellClicked (e) {
+    changeAvatar (e) {
       let imagePicker = this.$refs.imagePicker
       imagePicker.pick((file) => {
         uploadFile(file.name, file.url).then(({data}) => {
@@ -76,7 +68,7 @@ export default {
         })
       })
     },
-    wxcButtonClicked (e) {
+    changeNickname (e) {
       setNickname(this.userInfo.id, this.nickName).then(({data}) => {
         modal.toast({
           message: data.info

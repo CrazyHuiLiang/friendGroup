@@ -1,10 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="个人中心" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"
-                 leftButton=""
-                 right-text=""></wxc-minibar>
+    <wxc-minibar title="个人中心" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF" leftButton="" right-text=""></wxc-minibar>
     <div v-if="userInfo !== null" class='user-center-wrap'>
       <div class="user-info-wrap">
         <image class="avatar" :src="userInfo.avatar"></image>
@@ -13,13 +9,11 @@
           <text>{{userInfo.account}}</text>
         </div>
       </div>
-
       <div class='entry-wrap'>
         <text class="entry-row" @click="gotoFriendGroup">朋友圈</text>
         <text class="entry-row" @click="gotoAlbum">相册</text>
         <text class="entry-row" @click="gotoUserSetting">个人设置</text>
       </div>
-
       <text class="logout" @click="logout">退出登录</text>
     </div>
     <tab class="tab" :activeIndex="1" @tabClicked="tabClicked"></tab>
@@ -36,7 +30,7 @@ import {getEntryUrl} from './util/util'
 import store from './store/index'
 const navigator = weex.requireModule('navigator')
 export default {
-  name: '',
+  name: 'UserCenter',
   data () {
     return {
       userInfo: null
@@ -55,7 +49,6 @@ export default {
           url: getEntryUrl('friendList'),
           animated: 'true'
         }, event => {
-          // modal.toast({ message: 'callback: ' + event })
         })
       }
     },
@@ -65,7 +58,6 @@ export default {
         url: getEntryUrl('friendGroup'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     },
     // 跳转到个人相册
@@ -75,7 +67,6 @@ export default {
         url: getEntryUrl('album'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     },
     // 跳转到用户设置
@@ -84,7 +75,6 @@ export default {
         url: getEntryUrl('userSetting'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     },
     // 退出登录
@@ -94,7 +84,6 @@ export default {
         url: getEntryUrl('login'),
         animated: 'true'
       }, event => {
-        // modal.toast({ message: 'callback: ' + event })
       })
     }
   },

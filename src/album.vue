@@ -1,10 +1,6 @@
 <template>
   <div class="wrapper" :class="[platform === 'ios' ? 'is-ios' : '']">
-    <wxc-minibar title="个人相册" style="padding-top: 30px;"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF">
-    </wxc-minibar>
-
+    <wxc-minibar title="个人相册" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF"> </wxc-minibar>
     <list v-if="userInfo" class="page-content">
       <cell>
         <image class="user-background" :src="userInfo.avatar" resize="cover"></image>
@@ -37,11 +33,8 @@ import {
   WxcMinibar,
   WxcCell
 } from 'weex-ui'
-// let navigator = weex.requireModule('navigator')
-// let modal = weex.requireModule('modal')
-
 export default {
-  name: 'App',
+  name: 'Album',
   data () {
     return {
       ui: {

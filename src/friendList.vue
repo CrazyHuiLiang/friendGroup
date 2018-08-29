@@ -1,11 +1,6 @@
 <template>
   <div class="wrapper">
-    <wxc-minibar title="通讯录"
-                 background-color="#009ff0"
-                 text-color="#FFFFFF"
-                 leftButton=""
-                 right-text="添加"
-                 @wxcMinibarRightButtonClicked="gotoSearchUser" style="padding-top: 30px;"></wxc-minibar>
+    <wxc-minibar title="通讯录" background-color="#009ff0" text-color="#FFFFFF" leftButton="" right-text="添加" @wxcMinibarRightButtonClicked="gotoSearchUser" style="padding-top: 30px;"></wxc-minibar>
     <div class="new-friend" @click='gotoNewFriend'>
       <text class="new-frined-text">新的朋友</text>
     </div>
@@ -30,7 +25,7 @@ import {getEntryUrl} from './util/util'
 import {getFriendsList} from './api/index'
 const navigator = weex.requireModule('navigator')
 export default {
-  name: '',
+  name: 'FiendList',
   data () {
     return {
       friendsList: []
