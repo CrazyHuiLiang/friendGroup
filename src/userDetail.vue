@@ -3,9 +3,9 @@
     <wxc-minibar title="好友详情" style="padding-top: 30px;" background-color="#009ff0" text-color="#FFFFFF" right-text=""></wxc-minibar>
     <div v-if="userInfo !== null" class='user-center-wrap'>
       <div class="user-info-wrap">
-        <image class="avatar" :src="userInfo.avatar"></image>
+        <image class="avatar" :src="userInfo.avatar || gConfig.defaultValues.avatar"></image>
         <div class='name-wrap'>
-          <text>{{userInfo.nickname}}</text>
+          <text>{{userInfo.nickname || gConfig.defaultValues.nickName}}</text>
           <text>{{userInfo.account}}</text>
         </div>
       </div>
@@ -23,7 +23,7 @@ import {
   WxcButton
 } from 'weex-ui'
 import Tab from './components/Tab'
-import {getEntryUrl} from './util/util'
+import {getEntryUrl, getConfig} from './util/util'
 import store from './store/index'
 import {removeFriend} from './api/index'
 const navigator = weex.requireModule('navigator')
@@ -32,6 +32,7 @@ export default {
   name: 'UserDetail',
   data () {
     return {
+      gConfig: getConfig(),
       userInfo: null
     }
   },

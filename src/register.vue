@@ -9,7 +9,7 @@
     </wxc-cell>
     <text class="goto-login" @click="gotoLogin">已有有账号，去登录</text>
     <div class="row-center">
-      <WxcButton class="commit-bt" type="blue" text="注册" @wxcButtonClicked="register"></WxcButton>
+      <WxcButton class="commit-bt" type="blue" text="注册" @click.native="register"></WxcButton>
     </div>
   </div>
 </template>

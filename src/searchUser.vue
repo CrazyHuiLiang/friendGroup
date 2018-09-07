@@ -5,9 +5,9 @@
     <div>
       <text v-if="user===null" class="no-user">请输入好友账号进行搜索</text>
       <div v-else class="user">
-        <image style="width:50px;height:50px" :src="user.avatar"></image>
-        <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
-        <wxc-button text="添加好友" type='blue' size='small' @wxcButtonClicked="requestAddFriend"></wxc-button>
+        <image style="width:50px;height:50px" :src="user.avatar || gConfig.defaultValues.avatar"></image>
+        <text style="flex: 1; margin-left: 20px;">{{user.nickname || gConfig.defaultValues.nickName}}</text>
+        <wxc-button text="添加好友" type='blue' size='small' @click.native="requestAddFriend"></wxc-button>
       </div>
     </div>
   </div>
@@ -23,6 +23,7 @@ import {
   searchUserWithAccount,
   addFriendWithUserId
 } from './api/index'
+import {getConfig} from './util/util'
 import store from './store/index'
 const modal = weex.requireModule('modal')
 export default {
@@ -31,6 +32,7 @@ export default {
   },
   data () {
     return {
+      gConfig: getConfig(),
       searchKey: '',
       user: null
     }

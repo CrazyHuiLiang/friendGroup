@@ -1,3 +1,5 @@
+import base from './base'
 export default {
-  host: 'http://localhost:3000'
+  ...base,
+  host: 'http://www.s1.com:3000'
 }

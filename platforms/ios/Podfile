@@ -1,10 +1,12 @@
 source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '8.0'
 #inhibit_all_warnings!
 
 def common
 	pod 'WeexSDK'
+    pod 'WXDevtool', '0.15.3', :configurations => ['Debug']
     pod 'WeexPluginLoader'
     pod 'SDWebImage', '3.7.5'
     pod 'SocketRocket', '0.4.2'

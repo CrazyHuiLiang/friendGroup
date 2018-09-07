@@ -11,6 +11,7 @@
 #import <WeexSDK/WeexSDK.h>
 #import <AVFoundation/AVFoundation.h>
 #import "WeexSDKManager.h"
+#import <TBWXDevTool/WXDevTool.h>
 
 @interface AppDelegate ()
 @end
@@ -22,6 +23,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//    [WXDevTool setDebug:YES];
+//    [WXDevTool launchDevToolDebugWithUrl:@"ws://172.16.128.219:8088/debugProxy/native/bed6234c-4196-4da6-a9ed-f1ea066018a0"];
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -31,7 +35,6 @@
     
     // Override point for customization after application launch.
 //    [self startSplashScreen];
-    
     return YES;
 }
 

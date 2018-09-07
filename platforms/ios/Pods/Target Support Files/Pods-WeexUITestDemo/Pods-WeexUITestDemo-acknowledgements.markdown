@@ -44,6 +44,11 @@ THE SOFTWARE.
 
 
 
+## WXDevtool
+
+Alibaba-INC copyright
+
+
 ## WeexPluginLoader
 
 Alibaba-INC copyright

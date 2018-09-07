@@ -9,7 +9,7 @@
     </wxc-cell>
     <text class="goto-register" @click="gotoRegister">还没有账号</text>
     <div class="row-center">
-      <WxcButton type="blue" text="登录" @wxcButtonClicked="login"></WxcButton>
+      <WxcButton type="blue" text="登录" @click.native="login"></WxcButton>
     </div>
   </div>
 </template>

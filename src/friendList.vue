@@ -6,8 +6,8 @@
     </div>
     <div class="friend-list">
       <div class="friend" v-for="(user) in friendsList" :key="user.id" @click="userClicked(user)">
-        <image style="width:50px;height:50px" :src="user.avatar"></image>
-        <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
+        <image style="width:50px;height:50px" :src="user.avatar || gConfig.defaultValues.avatar"></image>
+        <text style="flex: 1; margin-left: 20px;">{{user.nickname || gConfig.defaultValues.nickName}}</text>
       </div>
     </div>
     <tab class="tab" :activeIndex="0" @tabClicked="tabClicked"></tab>
@@ -21,13 +21,14 @@ import {
 } from 'weex-ui'
 import store from './store/index'
 import Tab from './components/Tab'
-import {getEntryUrl} from './util/util'
+import {getEntryUrl, getConfig} from './util/util'
 import {getFriendsList} from './api/index'
 const navigator = weex.requireModule('navigator')
 export default {
   name: 'FiendList',
   data () {
     return {
+      gConfig: getConfig(),
       friendsList: []
     }
   },
