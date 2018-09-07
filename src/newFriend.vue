@@ -5,8 +5,8 @@
       <text v-if="users===null" class="no-user">暂无内容</text>
       <div v-else>
         <div v-for="user in users" :key="user.id" class="user">
-          <image style="width:50px;height:50px" :src="user.avatar"></image>
-          <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
+          <image style="width:50px;height:50px" :src="user.avatar || gConfig.defaultValues.avatar"></image>
+          <text style="flex: 1; margin-left: 20px;">{{user.nickname || gConfig.defaultValues.nickName}}</text>
           <wxc-button v-if="user.flag === 0" text="添加" type='blue' size='small' @wxcButtonClicked="handleRequest(user.userId, 1)"></wxc-button>
           <wxc-button v-if="user.flag === 0" text="拒绝" type='red' size='small' @wxcButtonClicked="handleRequest(user.userId, 2)"></wxc-button>
           <text v-if="user.flag === 1">已添加</text>
@@ -22,6 +22,7 @@ import {
   WxcButton,
   WxcMinibar
 } from 'weex-ui'
+import {getConfig} from './util/util'
 import {
   selectAddMyFriendRequest,
   updateAddFriendRequest
@@ -36,6 +37,7 @@ export default {
   },
   data () {
     return {
+      gConfig: getConfig(),
       users: null
     }
   },

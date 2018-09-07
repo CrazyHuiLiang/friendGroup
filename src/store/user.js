@@ -1,3 +1,4 @@
+import {getConfig} from '@/util/util'
 const storage = weex.requireModule('storage')
 const UserInfoKey = 'UserInfoKey'
 
@@ -10,6 +11,10 @@ export default {
   mutations: {
     // 设置用户信息
     setUserInfo (state, userInfo) {
+      if (userInfo) {
+        userInfo.avatar = userInfo.avatar || getConfig().defaultValues.avatar
+        userInfo.nickname = userInfo.nickname || getConfig().defaultValues.nickName
+      }
       state.userInfo = userInfo
       console.log('setUserInfo', userInfo)
       storage.setItem(UserInfoKey, JSON.stringify(userInfo))
