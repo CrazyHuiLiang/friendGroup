@@ -27291,8 +27291,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "blue",
       "text": "登录"
     },
-    nativeOn: {
-      "click": _vm.login
+    on: {
+      "wxcButtonClicked": _vm.login
     }
   })], 1)], 1)
 },staticRenderFns: []}

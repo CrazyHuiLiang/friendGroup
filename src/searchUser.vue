@@ -7,7 +7,7 @@
       <div v-else class="user">
         <image style="width:50px;height:50px" :src="user.avatar || gConfig.defaultValues.avatar"></image>
         <text style="flex: 1; margin-left: 20px;">{{user.nickname || gConfig.defaultValues.nickName}}</text>
-        <wxc-button text="添加好友" type='blue' size='small' @click.native="requestAddFriend"></wxc-button>
+        <wxc-button text="添加好友" type='blue' size='small' @wxcButtonClicked="requestAddFriend"></wxc-button>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@
     </wxc-cell>
     <wxc-cell v-if="userInfo" label="昵称" :has-arrow="true" :has-top-border="false">
       <input slot="value" class="nickName" v-model="nickName">
-      <wxc-button text="确定" type="blue" size="small" @click.native="changeNickname"></wxc-button>
+      <wxc-button text="确定" type="blue" size="small" @wxcButtonClicked="changeNickname"></wxc-button>
     </wxc-cell>
     <image-picker ref="imagePicker"></image-picker>
   </div>

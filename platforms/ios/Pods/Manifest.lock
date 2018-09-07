@@ -5,8 +5,9 @@ PODS:
   - SocketRocket (0.4.2)
   - WeexPluginLoader (0.0.1.9.1):
     - WeexSDK
-  - WeexSDK (0.18.0)
-  - WXDevtool (0.15.3):
+  - WeexSDK (0.18.0.3)
+  - WXDevtool (0.16.3):
+    - SocketRocket
     - WeexSDK
 
 DEPENDENCIES:
@@ -14,7 +15,7 @@ DEPENDENCIES:
   - SocketRocket (= 0.4.2)
   - WeexPluginLoader
   - WeexSDK
-  - WXDevtool (= 0.15.3)
+  - WXDevtool
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
@@ -28,9 +29,9 @@ SPEC CHECKSUMS:
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   WeexPluginLoader: 85c1304f8ba29864e58531614a0acfeceef1b85c
-  WeexSDK: ac56f255ce9a48e93ebc2e003956ab20da33321d
-  WXDevtool: 6c837383e778a9442ee500db4069a95be321dac6
+  WeexSDK: 173541f2d0042664168b305952398145c0c6039c
+  WXDevtool: c028138b4e3a8856758acfea2328f708d3adbedd
 
-PODFILE CHECKSUM: f6f829fd8e1641ad84825a0af1b1c3e84eea7b36
+PODFILE CHECKSUM: 0888a62c849b529c117177335dd4e8890179def0
 
 COCOAPODS: 1.5.3

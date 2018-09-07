@@ -7,8 +7,8 @@
         <div v-for="user in users" :key="user.id" class="user">
           <image style="width:50px;height:50px" :src="user.avatar"></image>
           <text style="flex: 1; margin-left: 20px;">{{user.nickname}}</text>
-          <wxc-button v-if="user.flag === 0" text="添加" type='blue' size='small' @click.native="handleRequest(user.userId, 1)"></wxc-button>
-          <wxc-button v-if="user.flag === 0" text="拒绝" type='red' size='small' @click.native="handleRequest(user.userId, 2)"></wxc-button>
+          <wxc-button v-if="user.flag === 0" text="添加" type='blue' size='small' @wxcButtonClicked="handleRequest(user.userId, 1)"></wxc-button>
+          <wxc-button v-if="user.flag === 0" text="拒绝" type='red' size='small' @wxcButtonClicked="handleRequest(user.userId, 2)"></wxc-button>
           <text v-if="user.flag === 1">已添加</text>
           <text v-if="user.flag === 2">已拒绝</text>
         </div>
