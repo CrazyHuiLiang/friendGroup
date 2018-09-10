@@ -10,9 +10,9 @@
         <image class="user-background" :src="userInfo.avatar" resize="cover"></image>
       </cell>
       <cell class="user-info-container">
-        <div class="avatar-container">
-          <image class="avatar" :src="userInfo.avatar" resize="cover"></image>
-        </div>
+        <!--<div class="avatar-container">-->
+          <!--<image class="avatar" :src="userInfo.avatar" resize="cover"></image>-->
+        <!--</div>-->
         <text class="nickname">{{userInfo.nickname}}</text>
       </cell>
       <cell class="message-container">
@@ -119,31 +119,35 @@ export default {
     height: 500px;
   }
   .user-info-container {
-    flex-direction: row-reverse;
-    margin-top: -100px;
-    margin-right: 20px;
+    /*flex-direction: row-reverse;*/
+    /*margin-top: -100px;*/
+    /*margin-right: 20px;*/
+    border-bottom-color: #dddddd;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
   }
-  .avatar-container {
-    width: 150px;
-    height: 150px;
-    background-color: #ffffff;
-    padding-top: 4px;
-    padding-right: 4px;
-    padding-bottom: 4px;
-    padding-left: 4px;
-    border-style: solid;
-    border-color: #cccccc;
-    border-width: 2px;
-  }
-  .avatar {
-    width: 138px;
-    height: 138px;
-  }
+  /*.avatar-container {*/
+    /*width: 150px;*/
+    /*height: 150px;*/
+    /*background-color: #ffffff;*/
+    /*padding-top: 4px;*/
+    /*padding-right: 4px;*/
+    /*padding-bottom: 4px;*/
+    /*padding-left: 4px;*/
+    /*border-style: solid;*/
+    /*border-color: #cccccc;*/
+    /*border-width: 2px;*/
+  /*}*/
+  /*.avatar {*/
+    /*width: 138px;*/
+    /*height: 138px;*/
+  /*}*/
   .nickname {
-    color: #ffffff;
+    /*color: #ffffff;*/
+    color: #000000;
     font-size: 36px;
-    margin-right: 45px;
-    text-align: right;
+    margin-left: 45px;
+    text-align: left;
     line-height: 100px;
   }
   .message-container {

@@ -16,8 +16,8 @@ export default {
         modal.toast({ message: '功能即将上线，敬请期待' })
       } else {
         imagePicker.pick((data) => {
-          let url = data// 'data:image/jpeg;base64,' + data
-          callback(url)
+          let file = JSON.parse(data)// 'data:image/jpeg;base64,' + data
+          callback(file)
         })
       }
     },

@@ -124,7 +124,7 @@ export default {
         duration: 0.3
       }, (value) => {
         if (value.result === '评论') {
-          this.sendComment(comment.userA.id, value.data)
+          this.sendComment(comment.id, value.data)
         }
       })
     }

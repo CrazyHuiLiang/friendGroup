@@ -12,6 +12,8 @@
 #import "WXDemoViewController.h"
 #import "WXImgLoaderDefaultImpl.h"
 
+#import "ImagePicker.h"
+
 @implementation WeexSDKManager
 
 + (void)setup;
@@ -38,6 +40,7 @@
     
     [self initWeexSDK];
     [self loadCustomContainWithScannerWithUrl:url];
+    
 }
 
 + (void)initWeexSDK
@@ -54,6 +57,8 @@
 #ifdef DEBUG
     [WXLog setLogLevel:WXLogLevelLog];
 #endif
+    
+    [WXSDKEngine registerModule:@"imagePicker" withClass:[ImagePicker class]];
 }
 
 + (void)loadCustomContainWithScannerWithUrl:(NSURL *)url
